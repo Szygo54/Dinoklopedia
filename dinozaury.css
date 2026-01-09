@@ -3,7 +3,7 @@ body {
     background-image: url('img/tło.jpg'); 
     background-repeat: repeat; 
     /* 3. Wielkość jednego kafelka (dostosuj to liczbą, np. 100px, 300px) */
-    background-size: 250px; 
+    background-size: 340px; 
     /* Reszta Twoich ustawień: */
     font-family: 'Slackey', cursive;
     margin: 0;
@@ -59,7 +59,7 @@ h1 {
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     width: 100%;
-    max-width: 800px;
+    max-width: 1200px; 
 }
 
 .nav-btn {
@@ -69,19 +69,27 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 40px; 
+    padding: 1 1px;
     text-decoration: none; 
     font-family: 'Slackey', cursive;
     font-weight: 500;
     color: #3E2723;
-    font-size: 30px;
+    font-size: 35px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: transform 0.2s;
 }
 
-.btn-dino { background-color: #A65644; }
-.btn-art  { background-color: #D99A4E; }
-.btn-quiz { background-color: #BFBA75; }
-.btn-about{ background-color: #727FA6; }
+.btn-icon {
+    height: 120px; 
+    width: auto;
+    transform: rotate(-5deg);
+}
+
+.btn-stego { background-color: #BFBA75; }
+.btn-brono { background-color: #D99A4E; }
+.btn-tyrano { background-color: #A65644; }
+.btn-plezjo { background-color: #727FA6; }
 
 .nav-btn:hover {
     transform: translateY(-5px);
