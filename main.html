@@ -1,15 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <title>Dinoklopedia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Chewy&family=Titan+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Chewy&family=Slackey&family=Titan+One&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <div class="hero-box">
-        Witaj mały Paleontologu
+
+    <div class="hero-box" id="baner">
+        <span id="baner-tekst">Witaj mały Paleontologu</span>
     </div>
 
     <div class="nav-container">
@@ -19,5 +22,44 @@
         <a href="onas.html" class="nav-btn btn-about">O NAS</a>
     </div>
 
+    <script>
+        const slajdy = [
+            { zdjecie: 'baner.png', tekst: 'Witaj mały Paleontologu' },
+            { zdjecie: 'img/baner2.png', tekst: 'DINOKLOPEDIA' },
+            { zdjecie: 'img/baner3.png', tekst: 'Rozwiąż nasz super QUIZ!' }
+        ];
+    
+        let aktualnyNumer = 0;
+        const baner = document.getElementById('baner');
+        const banerTekst = document.getElementById('baner-tekst');
+    
+        function zmienSlajd() {
+            banerTekst.style.opacity = 0;
+
+            setTimeout(() => {
+                aktualnyNumer++;
+                if (aktualnyNumer >= slajdy.length) {
+                    aktualnyNumer = 0;
+                }
+                const nowySlajd = slajdy[aktualnyNumer];
+    
+                // Podmieniamy tło (ono zmienia się płynnie dzięki CSS)
+                baner.style.backgroundImage = `url('${nowySlajd.zdjecie}')`;
+                
+                // Podmieniamy tekst (którego teraz nie widać)
+                banerTekst.innerHTML = nowySlajd.tekst;
+    
+                // KROK 3: Pokazujemy nowy tekst (przywracamy widoczność)
+                // Dajemy malutkie opóźnienie (50ms), żeby przeglądarka "zauważyła" zmianę
+                setTimeout(() => {
+                     banerTekst.style.opacity = 1;
+                }, 50);
+    
+            }, 500); // Ten czas musi być taki sam jak czas transition w CSS (0.5s = 500ms)
+        }
+    
+        // Zmieniamy co 5 sekund
+        setInterval(zmienSlajd, 5000);
+    </script>
 </body>
 </html>

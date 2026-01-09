@@ -1,6 +1,6 @@
 body {
     background-color: #FAf6EA; 
-    font-family: 'Fredoka', sans-serif;
+    font-family: 'Slackey', sans-serif;
     margin: 0;
     padding: 20px;
     display: flex;
@@ -21,7 +21,7 @@ body {
 
 .hero-box {
     background-image: url('baner.png');
-    font-family: 'Titan One', sans-serif; /* Tę linię podmień */
+    font-family: 'Slackey', sans-serif; /* Tę linię podmień */
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -45,6 +45,8 @@ body {
         -3px  3px 0 #FFFFFF,
          3px -3px 0 #FFFFFF,
         -3px -3px 0 #FFFFFF;
+
+    transition: background-image 2s ease-in-out;
 }
 
 .nav-container {
@@ -58,7 +60,7 @@ body {
 
 
 .nav-btn {
-    
+    font-family: 'Slackey', sans-serif; /* Tę linię podmień */
     flex: 1;  
     min-width: 200px; 
     height: 200px;
@@ -95,4 +97,9 @@ body {
     filter: brightness(0.9);    
     cursor: pointer;
     
+}
+
+#baner-tekst {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
 }
