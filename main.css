@@ -1,5 +1,7 @@
 body {
-    background-color: #FAf6EA; 
+    background-image: url('img/tło.jpg'); 
+    background-repeat: repeat; 
+    background-size: 340px; 
     font-family: 'Slackey', sans-serif;
     margin: 0;
     padding: 20px;
@@ -20,8 +22,7 @@ body {
 
 .hero-box {
     position: relative; 
-    
-    background-image: url('baner.png');
+
     font-family: 'Slackey', sans-serif;
     background-size: 100% 100%; 
     background-position: center;
@@ -35,17 +36,6 @@ body {
     align-items: center;
     margin-bottom: 30px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-
-    color: #3E2723;
-    font-size: 56px;  
-    font-weight: 700;   
-    letter-spacing: 1px; 
-    text-shadow:
-         3px  3px 0 #FFFFFF,
-        -3px  3px 0 #FFFFFF,
-         3px -3px 0 #FFFFFF,
-        -3px -3px 0 #FFFFFF;
-
     transition: background-image 0.5s ease-in-out; 
 }
 
