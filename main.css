@@ -20,29 +20,31 @@ body {
 
 
 .hero-box {
-
-    background-image: url('baner.png'); 
-    
-
-    background-size: cover; 
-
-    
-    background-position: center; 
+    background-image: url('baner.png');
+    font-family: 'Titan One', sans-serif; /* Tę linię podmień */
+    background-size: 100% 100%;
+    background-position: center;
     background-repeat: no-repeat;
-
     width: 100%;
     max-width: 1250px;
-    height: 625px;
+    height: 625px; 
     border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 28px;
-    color: white; 
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.8); 
-    
     margin-bottom: 30px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+    color: #3E2723;
+
+    font-size: 56px;  
+    font-weight: 700;   
+    letter-spacing: 1px; 
+    text-shadow:
+         3px  3px 0 #FFFFFF,
+        -3px  3px 0 #FFFFFF,
+         3px -3px 0 #FFFFFF,
+        -3px -3px 0 #FFFFFF;
 }
 
 .nav-container {
