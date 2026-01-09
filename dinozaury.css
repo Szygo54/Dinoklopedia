@@ -2,9 +2,7 @@ body {
     background-color: #FAf6EA; 
     background-image: url('img/tło.jpg'); 
     background-repeat: repeat; 
-    /* 3. Wielkość jednego kafelka (dostosuj to liczbą, np. 100px, 300px) */
     background-size: 340px; 
-    /* Reszta Twoich ustawień: */
     font-family: 'Slackey', cursive;
     margin: 0;
     padding: 10px 20px 20px 20px; 
