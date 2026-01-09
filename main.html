@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Dinoklopedia</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Chewy&family=Slackey&family=Titan+One&display=swap" rel="stylesheet">
@@ -13,8 +14,14 @@
 
     <div class="hero-box" id="baner">
         <span id="baner-tekst">Witaj mały Paleontologu</span>
-    </div>
 
+        <div class="slider-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+    
     <div class="nav-container">
         <a href="dinozaury.html" class="nav-btn btn-dino">DINOZAURY</a>
         <a href="kolorowanki.html" class="nav-btn btn-art">KOLOROWANKI</a>
@@ -30,36 +37,71 @@
         ];
     
         let aktualnyNumer = 0;
+        let timer; 
+        
         const baner = document.getElementById('baner');
         const banerTekst = document.getElementById('baner-tekst');
-    
-        function zmienSlajd() {
+        const kropki = document.querySelectorAll('.dot'); 
+
+        // Funkcja zapalająca odpowiednią kropkę
+        function aktualizujKropki(numer) {
+            kropki.forEach((kropka, index) => {
+                if (index === numer) {
+                    kropka.classList.add('active');
+                } else {
+                    kropka.classList.remove('active');
+                }
+            });
+        }
+
+        // Główna funkcja zmiany slajdu
+        function zmienSlajd(nowyNumer) {
+            // 1. Ukrywamy tekst
             banerTekst.style.opacity = 0;
 
             setTimeout(() => {
-                aktualnyNumer++;
-                if (aktualnyNumer >= slajdy.length) {
-                    aktualnyNumer = 0;
+                // 2. Ustalamy który slajd ma być następny
+                if (nowyNumer === undefined) {
+                    aktualnyNumer++;
+                    if (aktualnyNumer >= slajdy.length) {
+                        aktualnyNumer = 0;
+                    }
+                } else {
+                    aktualnyNumer = nowyNumer;
                 }
+    
                 const nowySlajd = slajdy[aktualnyNumer];
     
-                // Podmieniamy tło (ono zmienia się płynnie dzięki CSS)
+                // 3. Podmieniamy zdjęcie i tekst
                 baner.style.backgroundImage = `url('${nowySlajd.zdjecie}')`;
-                
-                // Podmieniamy tekst (którego teraz nie widać)
                 banerTekst.innerHTML = nowySlajd.tekst;
+                
+                // 4. Aktualizujemy kropki
+                aktualizujKropki(aktualnyNumer);
     
-                // KROK 3: Pokazujemy nowy tekst (przywracamy widoczność)
-                // Dajemy malutkie opóźnienie (50ms), żeby przeglądarka "zauważyła" zmianę
+                // 5. Pokazujemy tekst z powrotem
                 setTimeout(() => {
                      banerTekst.style.opacity = 1;
                 }, 50);
     
-            }, 500); // Ten czas musi być taki sam jak czas transition w CSS (0.5s = 500ms)
+            }, 500); // Czas musi pasować do transition w CSS (0.5s)
         }
+
+        // Obsługa kliknięcia w kropki
+        kropki.forEach((kropka, index) => {
+            kropka.addEventListener('click', () => {
+                zmienSlajd(index);
+                // Resetujemy licznik czasu po kliknięciu
+                clearInterval(timer);
+                timer = setInterval(() => zmienSlajd(), 5000);
+            });
+        });
     
-        // Zmieniamy co 5 sekund
-        setInterval(zmienSlajd, 5000);
+        // Uruchomienie automatycznej zmiany co 5 sekund
+        timer = setInterval(() => zmienSlajd(), 5000);
     </script>
 </body>
+<footer class="main-footer">
+    &copy; Dinoklopedia 2025
+</footer>
 </html>
