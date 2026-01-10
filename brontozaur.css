@@ -1,0 +1,180 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #FAf6EA;
+    background-image: url('img/tło.jpg');
+    background-repeat: repeat;
+    background-size: 350px;
+    
+    font-family: 'Slackey', cursive;
+    margin: 0;
+    padding: 20px;
+    color: #3E2723;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.btn-back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+    color: #3E2723;
+    font-size: 20px;
+    background: #FAf6EA;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    z-index: 100;
+}
+
+.btn-back:hover {
+    transform: scale(1.05);
+    background-color: #ece9d9;
+}
+
+.page-title {
+    text-transform: uppercase;
+    font-weight: normal;
+    margin-bottom: 30px;
+    margin-top: 0;
+    color: #3E2723;
+    font-size: 40px; 
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 0 #fff; 
+    text-align: center;
+    transition: font-size 0.3s; 
+}
+
+.dino-profile-card {
+    background-color: #E8E4D5;
+    width: 100%;
+    max-width: 1100px;
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.dino-image-box {
+    flex: 1;
+    background-color: #D3CFC0;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+}
+
+.dino-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    transform: rotate(-3deg);
+}
+
+.dino-info-box {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dino-name {
+    margin: 0;
+    font-size: 50px;
+    color: #be7e2e;
+    text-shadow: 2px 2px 0 #fff;
+    line-height: 1.2;
+}
+
+.info-block {
+    padding: 25px;
+    border-radius: 20px;
+    color: #fff;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+}
+
+.facts-box { background-color: #d59746; }
+.description-box { background-color:#ebbb5b; }
+
+.info-block h2 {
+    margin-top: 0;
+    font-size: 24px;
+    border-bottom: 2px dashed rgba(255,255,255,0.5);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.info-block p, .info-block ul {
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.info-block ul {
+    padding-left: 20px;
+}
+
+.main-footer {
+    margin-top: auto; 
+    padding-top: 15px; 
+    padding-bottom: 10px;
+    color: #3E2723; 
+    font-size: 16px;
+    text-align: center;
+    opacity: 0.8; 
+    letter-spacing: 1px;
+}
+
+@media (max-width: 850px) {
+    body {
+        padding: 10px; 
+    }
+    .btn-back {
+        font-size: 16px;
+        padding: 8px 15px;
+        left: 10px;
+        top: 15px;
+    }
+    .page-title {
+        font-size: 30px; 
+        margin-top: 55px;
+        margin-bottom: 20px;
+    }
+    .dino-profile-card {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+    }
+    .dino-image-box, .dino-info-box {
+        width: 100%; 
+    }
+    .dino-image-box {
+        min-height: auto; 
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+    .dino-name {
+        text-align: center;
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+    .info-block p, .info-block ul {
+        font-size: 16px; 
+    }
+    .info-block {
+        padding: 15px;
+    }
+}
