@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: #FAf6EA;
     background-image: url('img/tło.jpg');
@@ -15,9 +19,10 @@ body {
     min-height: 100vh;
 }
 
-/* Przycisk powrotu */
 .btn-back {
-    align-self: flex-start; /* Przycisk po lewej stronie */
+    position: absolute;
+    top: 20px;
+    left: 20px;
     text-decoration: none;
     color: #3E2723;
     font-size: 20px;
@@ -25,8 +30,8 @@ body {
     padding: 10px 20px;
     border-radius: 10px;
     box-shadow: 0 4px 0 rgba(0,0,0,0.1);
-    margin-bottom: 20px;
     transition: transform 0.2s;
+    z-index: 100;
 }
 
 .btn-back:hover {
@@ -34,80 +39,74 @@ body {
     background-color: #ece9d9;
 }
 
-/* Nagłówek DINOKLOPEDIA */
-.site-header {
-    font-size: 40px;
-    margin-top: -50px;
-    margin-bottom: 20px;
+.page-title {
     text-transform: uppercase;
+    font-weight: normal;
+    margin-bottom: 30px;
+    margin-top: 0;
+    color: #3E2723;
+    font-size: 40px; 
     letter-spacing: 2px;
+    text-shadow: 3px 3px 0 #fff; 
+    text-align: center;
+    transition: font-size 0.3s; 
 }
 
-/* --- GŁÓWNA KARTA (Ten duży szary prostokąt z makiety) --- */
 .dino-profile-card {
-    background-color: #E8E4D5; /* Jasnoszary/beżowy kolor karty */
+    background-color: #E8E4D5;
     width: 100%;
-    max-width: 1100px; /* Maksymalna szerokość */
-    
+    max-width: 1100px;
     border-radius: 30px;
     padding: 40px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     
-    /* UKŁAD FLEXBOX - To robi kolumny obok siebie */
     display: flex;
-    gap: 40px; /* Odstęp między zdjęciem a tekstem */
-    align-items: flex-start; /* Wyrównanie do góry */
+    gap: 40px;
+    align-items: flex-start;
 }
 
-/* --- LEWA KOLUMNA: ZDJĘCIE --- */
 .dino-image-box {
-    flex: 1; /* Zajmuje 1 część miejsca */
-    background-color: #D3CFC0; /* Ciemniejsze tło pod zdjęciem (opcjonalne) */
+    flex: 1;
+    background-color: #D3CFC0;
     border-radius: 20px;
     padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 300px; /* Minimalna wysokość */
+    min-height: 300px;
 }
 
 .dino-img {
-    max-width: 100%; /* Żeby zdjęcie nie wyszło poza ramkę */
+    max-width: 100%;
     height: auto;
     border-radius: 15px;
-    transform: rotate(-3deg); /* Lekki obrót dla zabawy */
+    transform: rotate(-3deg);
 }
 
-/* --- PRAWA KOLUMNA: TEKST --- */
 .dino-info-box {
-    flex: 1.5; /* Zajmuje trochę więcej miejsca niż zdjęcie */
+    flex: 1.5;
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Odstępy między klockami */
+    gap: 20px;
 }
 
 .dino-name {
     margin: 0;
     font-size: 50px;
-    color: #556B2F; /* Ciemna zieleń dla Stegozaura */
+    color: #556B2F;
     text-shadow: 2px 2px 0 #fff;
+    line-height: 1.2;
 }
 
-/* Styl dla klocków z tekstem (Ciekawostki i Opis) */
 .info-block {
     padding: 25px;
     border-radius: 20px;
-    color: #fff; /* Biały tekst na kolorowym tle */
+    color: #fff;
     box-shadow: 0 4px 0 rgba(0,0,0,0.1);
 }
 
-.facts-box {
-    background-color: #8D9E73; /* Oliwkowy (jak na obrazku w menu) */
-}
-
-.description-box {
-    background-color: #A4B07E; /* Trochę jaśniejszy zielony */
-}
+.facts-box { background-color: #8c9451; }
+.description-box { background-color:#bdb871; }
 
 .info-block h2 {
     margin-top: 0;
@@ -118,7 +117,7 @@ body {
 }
 
 .info-block p, .info-block ul {
-    font-family: 'Nunito', sans-serif; /* Czytelniejsza czcionka do dłuższego tekstu */
+    font-family: 'Nunito', sans-serif;
     font-size: 18px;
     line-height: 1.5;
     margin: 0;
@@ -128,24 +127,54 @@ body {
     padding-left: 20px;
 }
 
-/* --- RWD: WIDOK MOBILNY (Telefony) --- */
-/* Kiedy ekran jest mniejszy niż 850px, zmieniamy układ na pionowy */
+.main-footer {
+    margin-top: auto; 
+    padding-top: 15px; 
+    padding-bottom: 10px;
+    color: #3E2723; 
+    font-size: 16px;
+    text-align: center;
+    opacity: 0.8; 
+    letter-spacing: 1px;
+}
+
 @media (max-width: 850px) {
-    .dino-profile-card {
-        flex-direction: column; /* Elementy jeden pod drugim */
-        padding: 20px;
+    body {
+        padding: 10px; 
     }
-
-    .dino-image-box, .dino-info-box {
-        width: 100%; /* Rozciągnij na całą szerokość */
+    .btn-back {
+        font-size: 16px;
+        padding: 8px 15px;
+        left: 10px;
+        top: 15px;
     }
-
-    .dino-name {
-        text-align: center; /* Wyśrodkuj nazwę na telefonie */
-        font-size: 40px;
-    }
-    
-    .dino-image-box {
+    .page-title {
+        font-size: 30px; 
+        margin-top: 55px;
         margin-bottom: 20px;
+    }
+    .dino-profile-card {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+    }
+    .dino-image-box, .dino-info-box {
+        width: 100%; 
+    }
+    .dino-image-box {
+        min-height: auto; 
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+    .dino-name {
+        text-align: center;
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+    .info-block p, .info-block ul {
+        font-size: 16px; 
+    }
+    .info-block {
+        padding: 15px;
     }
 }
