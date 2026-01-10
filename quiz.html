@@ -23,9 +23,9 @@
         <div id="answer-buttons" class="answer-buttons">
             </div>
 
-        <button id="next-btn" class="next-btn">NASTĘPNE PYTANIE</button>
+        <button id="next-btn" class="next-btn">KOLEJNE PYTANIE</button>
         
-        <button id="menu-btn" class="menu-btn">WRÓĆ DO MENU</button>
+        <button id="menu-btn" class="menu-btn">MENU</button>
 
     </div>
 
@@ -91,10 +91,7 @@
         const imageElement = document.getElementById("quiz-img");
         const answerButtons = document.getElementById("answer-buttons");
         const nextButton = document.getElementById("next-btn");
-        
-        // Pobieramy nowy przycisk menu
         const menuButton = document.getElementById("menu-btn");
-        
         const titleElement = document.querySelector(".page-title"); 
 
         let currentQuestionIndex = 0;
@@ -102,22 +99,17 @@
 
         function startQuiz() {
             titleElement.classList.remove("page-title-big");
-            
             currentQuestionIndex = 0;
             score = 0;
-            nextButton.innerHTML = "NASTĘPNE PYTANIE";
+            nextButton.innerHTML = "KOLEJNE PYTANIE";
             imageElement.style.display = "block";
-            
-            // Ukrywamy przycisk menu na początku gry
             menuButton.style.display = "none";
-            
             showQuestion();
         }
 
         function showQuestion() {
             resetState();
             let currentQuestion = pytania[currentQuestionIndex];
-            
             let questionNo = currentQuestionIndex + 1;
             questionElement.innerHTML = questionNo + ". " + currentQuestion.pytanie;
 
@@ -168,13 +160,9 @@
             resetState();
             imageElement.style.display = "none"; 
             questionElement.innerHTML = `KONIEC GRY!<br>Twój wynik to ${score} na ${pytania.length}!`;
-            
             titleElement.classList.add("page-title-big");
-
             nextButton.innerHTML = "ZAGRAJ JESZCZE RAZ";
             nextButton.style.display = "inline-block";
-            
-            // POKAZUJEMY PRZYCISK MENU NA KOŃCU
             menuButton.style.display = "inline-block";
         }
 
@@ -196,7 +184,6 @@
             }
         });
         
-        // Obsługa kliknięcia w przycisk MENU
         menuButton.addEventListener("click", () => {
             window.location.href = "main.html";
         });

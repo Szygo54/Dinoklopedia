@@ -41,18 +41,10 @@ body {
     margin-top: 0px;
     color: #3E2723;
     font-size: 70px; 
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-shadow: 3px 3px 0 #fff; 
     text-align: center;
     transition: font-size 0.3s; 
-}
-
-.page-title {
-    text-transform: uppercase;
-    font-weight: normal;
-    margin-bottom: 30px;
-    color: #000;
-    letter-spacing: 1px;
 }
 
 .hero-box {

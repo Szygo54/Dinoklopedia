@@ -2,26 +2,26 @@
 body {
     background-image: url('img/tło.jpg'); 
     background-repeat: repeat; 
-    background-size: 400px; 
+    background-size: 340px; 
     background-color: #fdf8e6; 
     
     font-family: 'Slackey', sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 10px; /* Zmniejszony padding strony */
     display: flex;
     flex-direction: column;
     align-items: center; 
-    min-height: 100vh;
+    min-height: 90vh;
 }
 
 .page-title {
     text-transform: uppercase;
     font-weight: normal;
-    margin-bottom: 20px;
-    margin-top: 0;
+    margin-bottom: 15px; /* Mniejszy odstęp pod tytułem */
+    margin-top: 10px;
     color: #3E2723;
     
-    font-size: 40px; 
+    font-size: 36px; /* Nieco mniejszy tytuł */
     
     letter-spacing: 2px;
     text-shadow: 3px 3px 0 #fff; 
@@ -29,63 +29,57 @@ body {
     transition: font-size 0.3s; 
 }
 
-
 .page-title-big {
-    font-size: 90px !important; 
-    margin-bottom: 40px;
-    text-shadow: 5px 5px 0 #fff;
+    font-size: 60px !important; /* Mniejszy rozmiar "dużego" tytułu */
+    margin-bottom: 30px;
+    text-shadow: 4px 4px 0 #fff;
 }
 
+/* --- RAMKA QUIZU (KARTA) --- */
 .quiz-container {
     width: 100%;
-    max-width: 1250px;
+    max-width: 1250px; /* Zmniejszona szerokość ramki */
+    background-color: #E8E4D5;
+    border-radius: 30px; /* Zaokrąglone rogi */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Cień pod kartą */
+    
+    padding: 30px; /* Odstęp wewnątrz ramki */
     margin: 0 auto;
-    text-align: center;
-    
-    background-color: transparent; 
-    border: none;
-    box-shadow: none;
-    
-    padding: 0;
     
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .quiz-image {
     width: 100%;       
-    height: 250px;     
+    height: 220px; /* Zmniejszona wysokość zdjęcia */
     object-fit: cover; 
     background-color: #ccc; 
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     border-radius: 20px; 
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2); 
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15); 
+    border: 4px solid #fff; /* Biała obwódka wokół zdjęcia */
 }
-
 
 .question-text {
     font-family: 'Slackey', sans-serif;
-    font-size:20px;
+    font-size: 20px;
     color: #3E2723;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     line-height: 1.4;
     text-transform: uppercase;
+    text-align: center;
     padding: 0 10px;
-    text-shadow: 
-        2px 2px 0 #fff,
-        -2px -2px 0 #fff,
-        2px -2px 0 #fff,
-        -2px 2px 0 #fff;
+    /* Usunąłem mocny biały cień tekstu, bo na białym tle jest zbędny */
 }
-
 
 .answer-buttons {
     display: grid;
     grid-template-columns: 1fr 1fr; 
-    gap: 20px;
+    gap: 15px; /* Mniejszy odstęp między guzikami */
     width: 100%;
-    box-sizing: border-box; 
 }
 
 .btn-answer {
@@ -93,40 +87,37 @@ body {
     background-color: #79989B; 
     color: #3E2723; 
     border: none;
-    padding: 10px; 
-    font-size: 24px;
+    padding: 12px; 
+    font-size: 18px; /* Mniejsza czcionka odpowiedzi */
     border-radius: 15px; 
     cursor: pointer;
     transition: transform 0.1s, filter 0.1s;
-    box-shadow: 0 6px 0 #577375; 
+    box-shadow: 0 4px 0 #577375; 
     width: 100%; 
     text-transform: uppercase;
     letter-spacing: 1px;
-    text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
 }
 
 .btn-answer:hover:not([disabled]) {
-    transform: translateY(-3px); 
-    filter: brightness(1.1);     
+    transform: translateY(-2px); 
+    filter: brightness(1.1);    
 }
 
 .btn-answer:active:not([disabled]) {
-    transform: translateY(3px);  
+    transform: translateY(2px);  
     box-shadow: 0 2px 0 #577375; 
 }
 
 .btn-answer.correct {
     background-color: #8BC34A !important; 
-    box-shadow: 0 6px 0 #558B2F;
+    box-shadow: 0 4px 0 #558B2F;
     color: white; 
-    text-shadow: none;
 }
 
 .btn-answer.wrong {
     background-color: #E57373 !important; 
-    box-shadow: 0 6px 0 #C62828;
+    box-shadow: 0 4px 0 #C62828;
     color: white;
-    text-shadow: none;
 }
 
 /* Przycisk Dalej */
@@ -134,12 +125,12 @@ body {
     font-family: 'Slackey', sans-serif;
     background-color: #3E2723;
     color: #fff;
-    padding: 10px 80px;
-    font-size: 24px;
+    padding: 12px 60px;
+    font-size: 20px;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    margin-top: 30px;
+    margin-top: 25px;
     display: none; 
     box-shadow: 0 4px 0 #251614;
 }
@@ -152,12 +143,12 @@ body {
     font-family: 'Slackey', sans-serif;
     background-color: #FF7043; 
     color: #fff;
-    padding: 10px 80px;
-    font-size: 24px;
+    padding: 12px 60px;
+    font-size: 20px;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    margin-top: 20px; 
+    margin-top: 15px; 
     display: none; 
     box-shadow: 0 4px 0 #BF360C;
 }
@@ -166,13 +157,13 @@ body {
     transform: scale(1.05);
 }
 
-/* Stopka */
 .main-footer {
-    margin-top: auto;
-    padding-top: 40px;
-    font-family: 'Slackey', sans-serif;
-    color: #3E2723;
+    margin-top: auto; 
+    padding-top: 15px; 
+    padding-bottom: 10px;
+    color: #3E2723; 
     font-size: 16px;
-    font-weight: bold;
-    text-shadow: 1px 1px 0 #fff;
+    text-align: center;
+    opacity: 0.8; 
+    letter-spacing: 1px;
 }
