@@ -24,6 +24,8 @@
             </div>
 
         <button id="next-btn" class="next-btn">NASTĘPNE PYTANIE</button>
+        
+        <button id="menu-btn" class="menu-btn">WRÓĆ DO MENU</button>
 
     </div>
 
@@ -90,20 +92,25 @@
         const answerButtons = document.getElementById("answer-buttons");
         const nextButton = document.getElementById("next-btn");
         
-        // Pobieramy element tytułu, żeby go zmieniać
+        // Pobieramy nowy przycisk menu
+        const menuButton = document.getElementById("menu-btn");
+        
         const titleElement = document.querySelector(".page-title"); 
 
         let currentQuestionIndex = 0;
         let score = 0;
 
         function startQuiz() {
-            // <--- TUTAJ ZMIANA: Gdy gra startuje, usuwamy klasę "wielki", żeby napis był normalny
             titleElement.classList.remove("page-title-big");
             
             currentQuestionIndex = 0;
             score = 0;
             nextButton.innerHTML = "NASTĘPNE PYTANIE";
             imageElement.style.display = "block";
+            
+            // Ukrywamy przycisk menu na początku gry
+            menuButton.style.display = "none";
+            
             showQuestion();
         }
 
@@ -115,10 +122,7 @@
             questionElement.innerHTML = questionNo + ". " + currentQuestion.pytanie;
 
             imageElement.src = currentQuestion.obrazek;
-            
-            imageElement.onerror = function() { 
-                this.src = 'img/baner.png'; 
-            }; 
+            imageElement.onerror = function() { this.src = 'img/baner.png'; }; 
 
             currentQuestion.odpowiedzi.forEach(answer => {
                 const button = document.createElement("button");
@@ -165,11 +169,13 @@
             imageElement.style.display = "none"; 
             questionElement.innerHTML = `KONIEC GRY!<br>Twój wynik to ${score} na ${pytania.length}!`;
             
-            // <--- TUTAJ ZMIANA: Koniec gry -> powiększamy napis tytułowy
             titleElement.classList.add("page-title-big");
 
             nextButton.innerHTML = "ZAGRAJ JESZCZE RAZ";
             nextButton.style.display = "inline-block";
+            
+            // POKAZUJEMY PRZYCISK MENU NA KOŃCU
+            menuButton.style.display = "inline-block";
         }
 
         function handleNextButton() {
@@ -188,6 +194,11 @@
                 imageElement.style.display = "block";
                 startQuiz();
             }
+        });
+        
+        // Obsługa kliknięcia w przycisk MENU
+        menuButton.addEventListener("click", () => {
+            window.location.href = "main.html";
         });
 
         startQuiz();
