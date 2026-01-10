@@ -43,7 +43,7 @@
         
         const baner = document.getElementById('baner');
         const kropki = document.querySelectorAll('.dot'); 
-
+    
         function aktualizujKropki(numer) {
             kropki.forEach((kropka, index) => {
                 if (index === numer) {
@@ -53,7 +53,7 @@
                 }
             });
         }
-
+    
         function zmienSlajd(nowyNumer) {
             if (nowyNumer === undefined) {
                 aktualnyNumer++;
@@ -63,23 +63,31 @@
             } else {
                 aktualnyNumer = nowyNumer;
             }
-
+    
             const nowySlajd = slajdy[aktualnyNumer];
-
+    
             baner.style.backgroundImage = `url('${nowySlajd.zdjecie}')`;
             
             aktualizujKropki(aktualnyNumer);
         }
-
+    
+        // Obsługa kliknięć w kropki
         kropki.forEach((kropka, index) => {
             kropka.addEventListener('click', () => {
                 zmienSlajd(index);
                 clearInterval(timer);
                 timer = setInterval(() => zmienSlajd(), 5000);
             });
-        });
+        }); 
     
+        // --- NAPRAWA PONIŻEJ ---
+        
+        // 1. Najpierw ustawiamy pierwszy slajd od razu przy starcie:
+        zmienSlajd(0);
+    
+        // 2. Dopiero potem uruchamiamy automat, który zacznie zmieniać slajdy co 5 sekund:
         timer = setInterval(() => zmienSlajd(), 5000);
+    
     </script>
 </body>
 </html>
