@@ -1,14 +1,14 @@
 body {
     background-image: url('img/tło.jpg'); 
     background-repeat: repeat; 
-    background-size: 340px; 
+    background-size: 350px; 
     font-family: 'Slackey', sans-serif;
     margin: 0;
-    padding: 20px;
+    padding-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center; 
-    min-height: 100vh;
+    
 }
 
 .page-title {
@@ -29,12 +29,12 @@ body {
     background-repeat: no-repeat;
     width: 100%;
     max-width: 1250px;
-    height: 400px; 
+    height: 380px; 
     border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     transition: background-image 0.5s ease-in-out; 
 }
@@ -78,7 +78,7 @@ body {
     font-family: 'Slackey', sans-serif;
     flex: 1;  
     min-width: 200px; 
-    height: 200px;
+    height: 180px;
     border-radius: 15px;
     display: flex;
     justify-content: center;
@@ -104,8 +104,8 @@ body {
 
 
 .main-footer {
-    margin-top: auto; 
-    padding-top: 15px; 
+    margin-top: 10px; 
+    padding-top: 20px; 
     padding-bottom: 10px;
     color: #3E2723; 
     font-size: 16px;
