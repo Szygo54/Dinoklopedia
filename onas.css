@@ -1,0 +1,263 @@
+/* =========================================
+   STYLE BAZOWE (Z Twojego przykładu)
+========================================= */
+
+body {
+    /* Pamiętaj, aby plik tło.jpg znajdował się w folderze img/ obok pliku html */
+    background-image: url('img/tło.jpg'); 
+    background-repeat: repeat; 
+    background-size: 340px; 
+    background-color: #fdf8e6; /* Kolor zapasowy */
+    
+    font-family: 'Slackey', sans-serif;
+    margin: 0;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.page-title {
+    text-transform: uppercase;
+    font-weight: normal;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    color: #3E2723;
+    font-size: 36px;
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 0 #fff; 
+    text-align: center;
+    transition: font-size 0.3s; 
+}
+
+.page-title-big {
+    font-size: 50px !important; /* Nieco mniejszy niż w quizie, żeby pasował do gry */
+    margin-bottom: 30px;
+    text-shadow: 4px 4px 0 #fff, 6px 6px 0 rgba(62, 39, 35, 0.2); /* Dodatkowy cień dla głębi */
+}
+
+.main-footer {
+    margin-top: auto; 
+    padding-top: 30px; 
+    padding-bottom: 10px;
+    color: #3E2723; 
+    font-size: 14px;
+    text-align: center;
+    opacity: 0.8; 
+    letter-spacing: 1px;
+}
+
+/* =========================================
+   KONTENER GRY (Maszyna Slotowa)
+   Adaptacja .quiz-container
+========================================= */
+
+.game-machine-container {
+    width: 100%;
+    max-width: 800px; /* Węższy niż quiz, lepszy dla formatu slotów */
+    background-color: #E8E4D5;
+    border-radius: 40px; /* Bardziej zaokrąglone */
+    /* Dodajemy grubą, "kamienną" ramkę */
+    border: 8px solid #5D4037;
+    box-shadow: 
+        inset 0 0 20px rgba(0,0,0,0.1), /* Cień wewnętrzny */
+        0 15px 25px rgba(0,0,0,0.3);  /* Cień zewnętrzny (pod maszyną) */
+    
+    padding: 40px 30px;
+    margin: 0 auto 20px auto;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Ozdobne śruby w rogach maszyny (opcjonalne) */
+.game-machine-container::before,
+.game-machine-container::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #8D6E63;
+    border-radius: 50%;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5), 1px 1px 0 rgba(255,255,255,0.3);
+    top: 15px;
+}
+.game-machine-container::before { left: 15px; }
+.game-machine-container::after { right: 15px; }
+
+
+/* =========================================
+   OKNO BĘBNÓW (Reels Window)
+========================================= */
+
+/* Zewnętrzna ramka okna - stylizowana na wycięcie w skale */
+.slots-window-border {
+    width: 100%;
+    padding: 10px;
+    background-color: #3E2723;
+    border-radius: 25px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    margin-bottom: 25px;
+}
+
+/* Wewnętrzne okno, gdzie "kręcą się" symbole */
+.slots-window-inner {
+    width: 100%;
+    height: 220px; /* Stała wysokość okna */
+    background-color: #c5bfa6; /* Ciemniejsze tło wnętrza */
+    border-radius: 18px;
+    border: 4px solid #2a1a17;
+    box-shadow: inset 0 8px 20px rgba(0,0,0,0.4); /* Głęboki cień wewnętrzny */
+    
+    display: flex;
+    justify-content: space-around; /* Rozłożenie bębnów */
+    align-items: center;
+    overflow: hidden; /* Kluczowe: ukrywa symbole poza obszarem widzenia */
+    position: relative;
+}
+
+/* Wizualna linia wygrywająca na środku */
+.payline {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: rgba(255, 112, 67, 0.4); /* Półprzezroczysty pomarańczowy */
+    box-shadow: 0 0 10px rgba(255, 112, 67, 0.6);
+    transform: translateY(-50%);
+    z-index: 5;
+    pointer-events: none; /* Kliknięcia przechodzą przez linię */
+}
+
+/* Pojedynczy bęben */
+.reel {
+    width: 30%; /* Trzy bębny obok siebie */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* W prawdziwej grze JS, tutaj byłby bardzo wysoki pasek z symbolami,
+       który byśmy przesuwali (transform: translateY) */
+    position: relative; 
+    /* Pionowe separatory między bębnami */
+    border-right: 2px solid rgba(62, 39, 35, 0.2);
+}
+
+.reel:last-child {
+    border-right: none;
+}
+
+/* Kontener na pojedynczy widoczny symbol */
+.symbol-container {
+    width: 85%;
+    height: 85%;
+    background-color: #fcf8e8;
+    border-radius: 15px;
+    border: 3px solid #79989B; /* Styl ramki z Twojego quizu */
+    box-shadow: 
+        inset 0 0 10px rgba(255,255,255,0.5),
+        0 4px 5px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2; /* Powyżej linii payline */
+}
+
+.symbol-img {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+    filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.1));
+}
+
+/* =========================================
+   PANEL STATUSU I KONTROLI
+========================================= */
+
+.status-display {
+    margin-bottom: 20px;
+    text-align: center;
+    min-height: 35px; /* Rezerwacja miejsca, żeby nie skakało */
+}
+
+.status-text {
+    font-family: 'Slackey', sans-serif;
+    font-size: 22px;
+    color: #3E2723;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.controls-panel {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Przycisk SPIN - Adaptacja stylu .menu-btn (pomarańczowy) */
+.spin-button {
+    font-family: 'Slackey', sans-serif;
+    background-color: #FF7043; /* Wyrazisty pomarańcz */
+    color: #fff;
+    padding: 15px 80px; /* Duży, masywny przycisk */
+    font-size: 28px;
+    border: 4px solid #BF360C; /* Ciemniejsza obwódka */
+    border-radius: 60px;
+    cursor: pointer;
+    
+    /* Efekt 3D */
+    box-shadow: 
+        0 8px 0 #BF360C, 
+        0 15px 20px rgba(0,0,0,0.2);
+    
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 0 #BF360C;
+    transition: all 0.15s ease-in-out;
+    position: relative;
+    top: 0;
+}
+
+.spin-button:hover {
+    background-color: #ff8a65;
+    transform: translateY(-2px); /* Lekkie uniesienie */
+    box-shadow: 
+        0 10px 0 #BF360C, 
+        0 20px 25px rgba(0,0,0,0.2);
+}
+
+/* Efekt wciśnięcia przycisku */
+.spin-button:active {
+    top: 8px; /* Przesunięcie w dół */
+    box-shadow: 
+        0 0 0 #BF360C, /* Cień znika */
+        inset 0 3px 5px rgba(0,0,0,0.2); /* Wewnętrzny cień wciśnięcia */
+    background-color: #e64a19;
+}
+
+/* Opcjonalnie: stan zablokowany podczas kręcenia */
+.spin-button:disabled {
+    background-color: #bdc3c7;
+    border-color: #7f8c8d;
+    color: #ecf0f1;
+    box-shadow: 0 4px 0 #7f8c8d;
+    cursor: not-allowed;
+    top: 4px;
+    transform: none;
+}
+
+/* Responsywność dla mniejszych ekranów */
+@media (max-width: 600px) {
+    .page-title-big { font-size: 36px !important; }
+    .game-machine-container { padding: 25px 15px; border-width: 5px; }
+    .slots-window-inner { height: 180px; }
+    .spin-button { padding: 12px 50px; font-size: 22px; }
+    .status-text { font-size: 18px; }
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino Sloty - Graj i Rycz!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Slackey&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="onas.css">
+
+    <style>
+        .blur-anim {
+            filter: blur(4px);
+            transition: filter 0.1s;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="page-title page-title-big">Dino Sloty</h1>
+
+    <main class="game-machine-container">
+        
+        <div class="slots-window-border">
+            <div class="slots-window-inner">
+                <div class="payline"></div>
+
+                <div class="reel" id="reel-1">
+                    <div class="symbol-container">
+                        <img src="img/T-rex.png" alt="Symbol" class="symbol-img">
+                    </div>
+                </div>
+                
+                <div class="reel" id="reel-2">
+                    <div class="symbol-container">
+                        <img src="img/Plezjozaur.png" alt="Symbol" class="symbol-img">
+                    </div>
+                </div>
+                
+                <div class="reel" id="reel-3">
+                    <div class="symbol-container">
+                        <img src="img/triceratops.png" alt="Symbol" class="symbol-img">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="status-display">
+            <p class="status-text" id="statusText">Zakręć bębnami, aby wygrać!</p>
+        </div>
+
+        <div class="controls-panel">
+            <button id="spinBtn" class="spin-button">SPIN!</button>
+        </div>
+
+    </main>
+
+    <footer class="main-footer">
+        © 2026 Dinoklopedia
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. USTAWIENIA SYMBOLI ---
+            // Tutaj wpisujesz ścieżki do swoich obrazków.
+            // Na razie dałem linki z internetu, żebyś widział, że gra działa.
+            // Zmień je na: 'img/twoj_plik.png'
+            
+            const symbols = [
+                'img/T-rex.png',      // Twoje zdjęcie T-Rexa
+                'img/Plezjozaur.png',     // Twoje zdjęcie Triceratopsa
+                'img/triceratops.png',      // Twoje zdjęcie Jaja
+                'img/Stegozaur.png',      // Twoje zdjęcie Liścia
+                'img/Brontozaur.png'     // Twoje zdjęcie Wulkanu
+];
+
+            // Pobieramy elementy ze strony
+            const spinButton = document.getElementById('spinBtn');
+            const statusText = document.getElementById('statusText');
+            const reels = [
+                document.querySelector('#reel-1 .symbol-img'),
+                document.querySelector('#reel-2 .symbol-img'),
+                document.querySelector('#reel-3 .symbol-img')
+            ];
+            
+            let isSpinning = false; // Czy gra jest w trakcie kręcenia?
+
+            // Funkcja losująca jeden obrazek z listy
+            function getRandomSymbol() {
+                return symbols[Math.floor(Math.random() * symbols.length)];
+            }
+
+            // Główna funkcja uruchamiana przyciskiem
+            spinButton.addEventListener('click', () => {
+                if (isSpinning) return;
+                
+                isSpinning = true;
+                spinButton.disabled = true; // Blokujemy przycisk
+                statusText.innerText = "Bębny w ruchu... 🦕";
+                statusText.style.color = "#3E2723"; 
+
+                // Czas zatrzymania dla każdego bębna (w milisekundach)
+                const stopTimes = [1500, 2200, 3000]; 
+                const finalResults = [];
+
+                reels.forEach((reel, index) => {
+                    // Dodajemy efekt rozmycia
+                    reel.classList.add('blur-anim');
+
+                    // Rozpoczynamy szybkie zmienianie obrazków (animacja)
+                    const intervalId = setInterval(() => {
+                        reel.src = getRandomSymbol();
+                    }, 100);
+
+                    // Ustawiamy zatrzymanie bębna
+                    setTimeout(() => {
+                        clearInterval(intervalId); // Stop animacji
+                        reel.classList.remove('blur-anim'); // Usuń rozmycie
+                        
+                        // Wylosuj ostateczny wynik
+                        const finalSymbol = getRandomSymbol();
+                        reel.src = finalSymbol;
+                        finalResults[index] = finalSymbol;
+
+                        // Jeśli to ostatni bęben (index 2), sprawdzamy czy wygrana
+                        if (index === 2) {
+                            checkWin(finalResults);
+                        }
+
+                    }, stopTimes[index]);
+                });
+            });
+
+            // Sprawdzanie wygranej
+            function checkWin(results) {
+                isSpinning = false;
+                spinButton.disabled = false; // Odblokuj przycisk
+
+                const [r1, r2, r3] = results;
+
+                // Sprawdzamy, czy wszystkie 3 obrazki (src) są identyczne
+                if (r1 === r2 && r2 === r3) {
+                    statusText.innerHTML = "🎉 ROARRR! WIELKA WYGRANA! 🎉";
+                    statusText.style.color = "#d32f2f"; // Czerwony kolor wygranej
+                    
+                    // Mały efekt wizualny na przycisku
+                    spinButton.style.backgroundColor = "#FFD700";
+                    setTimeout(() => { spinButton.style.backgroundColor = ""; }, 2000);
+                } else {
+                    const loseTexts = [
+                        "Pudło! Spróbuj jeszcze raz.", 
+                        "Blisko! Ale nie tym razem.", 
+                        "Dinozaury uciekły... Kręć dalej!"
+                    ];
+                    statusText.innerText = loseTexts[Math.floor(Math.random() * loseTexts.length)];
+                    statusText.style.color = "#3E2723";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
