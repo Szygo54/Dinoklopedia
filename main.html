@@ -23,7 +23,7 @@
     <div class="nav-container">
         <a href="dinozaury.html" class="nav-btn btn-dino">DINOZAURY</a>
         <a href="kolorowanki.html" class="nav-btn btn-art">KOLOROWANKI</a>
-        <a href="quiz.html" class="nav-btn btn-quiz">QUIZ</a>
+        <a href="quizmenu.html" class="nav-btn btn-quiz">QUIZ</a>
         <a href="onas.html" class="nav-btn btn-about">O NAS</a>
     </div>
 
@@ -71,7 +71,7 @@
             aktualizujKropki(aktualnyNumer);
         }
     
-        // Obsługa kliknięć w kropki
+        
         kropki.forEach((kropka, index) => {
             kropka.addEventListener('click', () => {
                 zmienSlajd(index);
@@ -80,7 +80,6 @@
             });
         }); 
     
-        // --- NAPRAWA PONIŻEJ ---
         
         zmienSlajd(0);
         timer = setInterval(() => zmienSlajd(), 4000);
