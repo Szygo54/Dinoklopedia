@@ -1,0 +1,152 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('img/tło.jpg');
+    background-repeat: repeat;
+    background-size: 350px;
+    font-family: 'Slackey', cursive;
+    margin: 0;
+    padding: 20px;
+    color: #3E2723;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.btn-back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+    color: #3E2723;
+    font-size: 20px;
+    background: #FAf6EA;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    z-index: 100;
+}
+
+.btn-back:hover {
+    transform: scale(1.05);
+    background-color: #ece9d9;
+}
+
+.page-title {
+    text-transform: uppercase;
+    font-weight: normal;
+    margin-bottom: 40px;
+    margin-top: 0;
+    color: #3E2723;
+    font-size: 40px; 
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 0 #fff; 
+    text-align: center;
+}
+
+.coloring-grid {
+    width: 100%;
+    max-width: 1150px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 40px;
+    padding-bottom: 40px;
+}
+
+.coloring-card {
+    background-color: #E8E4D5;
+    border-radius: 30px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    position: relative;
+    transition: transform 0.3s ease;
+    overflow: hidden; 
+}
+
+.coloring-card:hover {
+    transform: translateY(-5px);
+}
+
+.img-wrapper {
+    border-radius: 20px;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 50px; 
+    border: 2px solid #D3CFC0;
+}
+
+.coloring-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.btn-download {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #727FA6; 
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Slackey', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px 40px;
+    border-radius: 12px;
+    
+    box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-download:hover {
+    background-color: #4A567A; 
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+}
+
+.btn-download:active {
+    transform: translateX(-50%) scale(0.95);
+    box-shadow: none;
+}
+
+.main-footer {
+    margin-top: auto; 
+    padding: 20px;
+    color: #3E2723; 
+    opacity: 0.8; 
+}
+
+@media (max-width: 850px) {
+    .page-title {
+        font-size: 30px; 
+        margin-top: 60px;
+    }
+
+    .btn-back {
+        font-size: 16px;
+        padding: 8px 15px;
+        left: 10px;
+        top: 15px;
+    }
+
+    .coloring-grid {
+        grid-template-columns: 1fr; 
+        gap: 30px;
+        padding: 0 15px;
+    }
+    
+    .coloring-card {
+        padding: 15px;
+    }
+    
+    .btn-download {
+        padding: 7px 25px;
+        font-size: 16px;
+    }
+}
