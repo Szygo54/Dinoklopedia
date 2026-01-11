@@ -45,7 +45,7 @@
     </footer>
 
     <script>
-        // --- 1. ZMIENNE I ELEMENTY ---
+
         const startScreen = document.getElementById('startScreen');
         const startBtn = document.getElementById('startGameBtn');
         const nameInput = document.getElementById('playerNameInput');
@@ -66,7 +66,7 @@
         const pytania = [
             {
                 pytanie: "Który dinozaur miał bardzo długą szyję, żeby sięgać do wysokich liści?",
-                obrazek: "img/triceratops.png", 
+                obrazek: "img/quiz1.png", 
                 odpowiedzi: [
                     { text: "Tyranozaur", correct: false },
                     { text: "Diplodok", correct: true },
@@ -76,27 +76,27 @@
             },
             {
                 pytanie: "Skąd brały się małe dinozaury?",
-                obrazek: "img/q2.jpg", 
+                obrazek: "img/quiz2.png", 
                 odpowiedzi: [
-                    { text: "Spadały z nieba", correct: true },
+                    { text: "Spadały z nieba", correct: false },
                     { text: "Rosły na drzewach", correct: false },
-                    { text: "Wykluwały się z jajek", correct: false },
+                    { text: "Wykluwały się z jajek", correct: true },
                     { text: "Znajdowano je w kapuście", correct: false }
                 ]
             },
             {
-                pytanie: "Co jadł ten olbrzym (Brachiozaur)?",
-                obrazek: "img/q3.jpg", 
+                pytanie: "Co robił Pterodaktyl?",
+                obrazek: "img/quiz3.png", 
                 odpowiedzi: [
-                    { text: "Pizzę", correct: false },
-                    { text: "Inne dinozaury", correct: false },
-                    { text: "Rośliny", correct: true },
-                    { text: "Ryby", correct: false }
+                    { text: "Latał w powietrzu", correct: true },
+                    { text: "Kopał tunele pod ziemią", correct: false },
+                    { text: "Budował domki z drewna", correct: false },
+                    { text: "Pływał w wodzie", correct: false }
                 ]
             },
             {
                 pytanie: "Do czego służyły płyty na grzbiecie Stegozaura?",
-                obrazek: "img/q4.jpg", 
+                obrazek: "img/quiz4.png", 
                 odpowiedzi: [
                     { text: "Do latania", correct: false },
                     { text: "Do obrony", correct: true },
@@ -105,13 +105,13 @@
                 ]
             },
             {
-                pytanie: "Kto jest nazywany KRÓLEM dinozaurów?",
-                obrazek: "img/q5.jpg", 
+                pytanie: "Czy ludzie i dinozaury żyli w tym samym czasie?",
+                obrazek: "img/quiz5.png", 
                 odpowiedzi: [
-                    { text: "Kura domowa", correct: false },
-                    { text: "Tyranozaur Rex", correct: true },
-                    { text: "Triceratops", correct: false },
-                    { text: "Ankylozaur", correct: false }
+                    { text: "Tak, bawili się razem", correct: false },
+                    { text: "Tak, ludzie jeździli na dinozaurach", correct: false },
+                    { text: "Tak, dinozaury zjadały ludzi", correct: false },
+                    { text: "Nie, ludzie pojawili się dużo później", correct: true }
                 ]
             }
         ];
