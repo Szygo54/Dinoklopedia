@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Dinoklopedia</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Chewy&family=Slackey&family=Titan+One&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+
+    <div id="startScreen" class="overlay">
+        <div class="overlay-content">
+            <h2>Witaj w DinoQuizie!</h2>
+            <p style="font-family: 'Slackey', sans-serif; color: #5D4037;">Podaj swoje imię, Odkrywco:</p>
+            <input type="text" id="playerNameInput" placeholder="Twoje imię..." maxlength="12">
+            <br>
+            <button id="startGameBtn" class="start-btn">ROZPOCZNIJ QUIZ</button>
+        </div>
+    </div>
+
+    <h1 class="page-title">DINOKLOPEDIA</h1>
+
+    <div class="quiz-container">
+        
+        <img id="quiz-img" src="img/triceratops.png" alt="Zdjęcie dinozaura" class="quiz-image">
+
+        <div id="question" class="question-text">Pytanie wczytuje się...</div>
+        
+        <div id="answer-buttons" class="answer-buttons">
+            </div>
+
+        <button id="next-btn" class="next-btn">KOLEJNE PYTANIE</button>
+        
+        <button id="menu-btn" class="menu-btn">MENU</button>
+
+    </div>
+
+    <footer class="main-footer">
+        &copy; Dinoklopedia 2026
+    </footer>
+
+    <script>
+        // --- 1. ZMIENNE I ELEMENTY ---
+        const startScreen = document.getElementById('startScreen');
+        const startBtn = document.getElementById('startGameBtn');
+        const nameInput = document.getElementById('playerNameInput');
+        
+        const quizContainer = document.querySelector('.quiz-container'); // Ważne do centrowania
+        const questionElement = document.getElementById("question");
+        const imageElement = document.getElementById("quiz-img");
+        const answerButtons = document.getElementById("answer-buttons");
+        const nextButton = document.getElementById("next-btn");
+        const menuButton = document.getElementById("menu-btn");
+        const titleElement = document.querySelector(".page-title"); 
+
+        let currentPlayerName = "Odkrywca"; 
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // --- 2. DANE PYTAŃ ---
+        const pytania = [
+            {
+                pytanie: "Ten dinozaur ma trzy rogi. Jak się nazywa?",
+                obrazek: "img/triceratops.png", 
+                odpowiedzi: [
+                    { text: "T-Rex", correct: false },
+                    { text: "Triceratops", correct: true },
+                    { text: "Stegozaur", correct: false },
+                    { text: "Raptor", correct: false }
+                ]
+            },
+            {
+                pytanie: "Który z nich potrafił latać?",
+                obrazek: "img/q2.jpg", 
+                odpowiedzi: [
+                    { text: "Pterodaktyl", correct: true },
+                    { text: "Diplodok", correct: false },
+                    { text: "T-Rex", correct: false },
+                    { text: "Spinozaur", correct: false }
+                ]
+            },
+            {
+                pytanie: "Co jadł ten olbrzym (Brachiozaur)?",
+                obrazek: "img/q3.jpg", 
+                odpowiedzi: [
+                    { text: "Pizzę", correct: false },
+                    { text: "Inne dinozaury", correct: false },
+                    { text: "Rośliny", correct: true },
+                    { text: "Ryby", correct: false }
+                ]
+            },
+            {
+                pytanie: "Do czego służyły płyty na grzbiecie Stegozaura?",
+                obrazek: "img/q4.jpg", 
+                odpowiedzi: [
+                    { text: "Do latania", correct: false },
+                    { text: "Do obrony", correct: true },
+                    { text: "Do pływania", correct: false },
+                    { text: "To była skorupa", correct: false }
+                ]
+            },
+            {
+                pytanie: "Kto jest nazywany KRÓLEM dinozaurów?",
+                obrazek: "img/q5.jpg", 
+                odpowiedzi: [
+                    { text: "Kura domowa", correct: false },
+                    { text: "Tyranozaur Rex", correct: true },
+                    { text: "Triceratops", correct: false },
+                    { text: "Ankylozaur", correct: false }
+                ]
+            }
+        ];
+
+        // --- 3. OBSŁUGA EKRANU STARTOWEGO ---
+        startBtn.addEventListener('click', () => {
+            const name = nameInput.value.trim();
+            if (name === "") {
+                alert("Proszę wpisz imię, żeby zacząć!");
+            } else {
+                currentPlayerName = name; 
+                startScreen.style.display = 'none'; // Ukryj ekran startowy
+            }
+        });
+
+        // --- 4. FUNKCJE GRY ---
+
+        function startQuiz() {
+            titleElement.classList.remove("page-title-big");
+            
+            // RESETOWANIE STYLU (USUWANIE CENTROWANIA)
+            quizContainer.classList.remove("score-view"); 
+
+            currentQuestionIndex = 0;
+            score = 0;
+            nextButton.innerHTML = "KOLEJNE PYTANIE";
+            imageElement.style.display = "block";
+            menuButton.style.display = "none";
+            showQuestion();
+        }
+
+        function showQuestion() {
+            resetState();
+            let currentQuestion = pytania[currentQuestionIndex];
+            let questionNo = currentQuestionIndex + 1;
+            questionElement.innerHTML = questionNo + ". " + currentQuestion.pytanie;
+
+            imageElement.src = currentQuestion.obrazek;
+            // Zabezpieczenie: jeśli nie ma obrazka, wczytaj domyślny
+            imageElement.onerror = function() { this.src = 'img/triceratops.png'; }; 
+
+            currentQuestion.odpowiedzi.forEach(answer => {
+                const button = document.createElement("button");
+                button.innerHTML = answer.text;
+                button.classList.add("btn-answer");
+                answerButtons.appendChild(button);
+                if(answer.correct) {
+                    button.dataset.correct = answer.correct;
+                }
+                button.addEventListener("click", selectAnswer);
+            });
+        }
+
+        function resetState() {
+            nextButton.style.display = "none";
+            while(answerButtons.firstChild) {
+                answerButtons.removeChild(answerButtons.firstChild);
+            }
+        }
+
+        function selectAnswer(e) {
+            const selectedBtn = e.target;
+            const isCorrect = selectedBtn.dataset.correct === "true";
+            
+            if(isCorrect) {
+                selectedBtn.classList.add("correct");
+                score++;
+            } else {
+                selectedBtn.classList.add("wrong");
+            }
+
+            Array.from(answerButtons.children).forEach(button => {
+                if(button.dataset.correct === "true") {
+                    button.classList.add("correct");
+                }
+                button.disabled = true; 
+            });
+
+            nextButton.style.display = "inline-block";
+        }
+
+        function showScore() {
+            resetState();
+            imageElement.style.display = "none"; 
+            
+            // WŁĄCZAMY CENTROWANIE EKRANU KOŃCOWEGO
+            quizContainer.classList.add("score-view");
+
+            questionElement.innerHTML = `GRATULACJE ${currentPlayerName.toUpperCase()}!<br>Twój wynik to ${score} na ${pytania.length}!`;
+            
+            titleElement.classList.add("page-title-big");
+            nextButton.innerHTML = "ZAGRAJ JESZCZE RAZ";
+            nextButton.style.display = "inline-block";
+            menuButton.style.display = "inline-block";
+        }
+
+        function handleNextButton() {
+            currentQuestionIndex++;
+            if(currentQuestionIndex < pytania.length) {
+                showQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        nextButton.addEventListener("click", () => {
+            if(currentQuestionIndex < pytania.length) {
+                handleNextButton();
+            } else {
+                imageElement.style.display = "block";
+                startQuiz();
+            }
+        });
+        
+        menuButton.addEventListener("click", () => {
+            window.location.href = "main.html"; 
+        });
+
+        // Startujemy
+        startQuiz();
+    </script>
+</body>
+</html>
