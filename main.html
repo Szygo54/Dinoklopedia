@@ -71,7 +71,7 @@
             aktualizujKropki(aktualnyNumer);
         }
     
-        
+        // Obsługa kliknięć w kropki
         kropki.forEach((kropka, index) => {
             kropka.addEventListener('click', () => {
                 zmienSlajd(index);
@@ -80,6 +80,7 @@
             });
         }); 
     
+        // --- NAPRAWA PONIŻEJ ---
         
         zmienSlajd(0);
         timer = setInterval(() => zmienSlajd(), 4000);
