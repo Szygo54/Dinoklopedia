@@ -1,13 +1,12 @@
 /* =========================================
-   STYLE BAZOWE (Z Twojego przykładu)
+   STYLE BAZOWE
 ========================================= */
 
 body {
-    /* Pamiętaj, aby plik tło.jpg znajdował się w folderze img/ obok pliku html */
-    background-image: url('img/tło.jpg'); 
+    background-image: url('img/tło.jpg'); /* Zakładam, że masz to tło */
     background-repeat: repeat; 
     background-size: 340px; 
-    background-color: #fdf8e6; /* Kolor zapasowy */
+    background-color: #fdf8e6; 
     
     font-family: 'Slackey', sans-serif;
     margin: 0;
@@ -29,13 +28,12 @@ body {
     letter-spacing: 2px;
     text-shadow: 3px 3px 0 #fff; 
     text-align: center;
-    transition: font-size 0.3s; 
 }
 
 .page-title-big {
-    font-size: 50px !important; /* Nieco mniejszy niż w quizie, żeby pasował do gry */
+    font-size: 48px !important;
     margin-bottom: 30px;
-    text-shadow: 4px 4px 0 #fff, 6px 6px 0 rgba(62, 39, 35, 0.2); /* Dodatkowy cień dla głębi */
+    text-shadow: 4px 4px 0 #fff, 6px 6px 0 rgba(62, 39, 35, 0.2);
 }
 
 .main-footer {
@@ -46,26 +44,22 @@ body {
     font-size: 14px;
     text-align: center;
     opacity: 0.8; 
-    letter-spacing: 1px;
 }
 
 /* =========================================
-   KONTENER GRY (Maszyna Slotowa)
-   Adaptacja .quiz-container
+   GŁÓWNY STÓŁ GRY (Zmodyfikowany)
 ========================================= */
 
 .game-machine-container {
     width: 100%;
-    max-width: 800px; /* Węższy niż quiz, lepszy dla formatu slotów */
-    background-color: #E8E4D5;
-    border-radius: 40px; /* Bardziej zaokrąglone */
-    /* Dodajemy grubą, "kamienną" ramkę */
+    max-width: 800px;
+    border-radius: 40px;
     border: 8px solid #5D4037;
     box-shadow: 
-        inset 0 0 20px rgba(0,0,0,0.1), /* Cień wewnętrzny */
-        0 15px 25px rgba(0,0,0,0.3);  /* Cień zewnętrzny (pod maszyną) */
+        inset 0 0 40px rgba(0,0,0,0.5), /* Głębszy cień wewnątrz */
+        0 15px 25px rgba(0,0,0,0.3);
     
-    padding: 40px 30px;
+    padding: 30px 20px;
     margin: 0 auto 20px auto;
     
     display: flex;
@@ -75,7 +69,17 @@ body {
     position: relative;
 }
 
-/* Ozdobne śruby w rogach maszyny (opcjonalne) */
+/* Styl zielonego sukna stołu */
+.table-felt {
+    background-color: #35682d; /* Ciemna, prehistoryczna zieleń */
+    /* Tekstura sukna za pomocą radial-gradient */
+    background-image: radial-gradient(#407a36 20%, transparent 20%),
+                      radial-gradient(#407a36 20%, transparent 20%);
+    background-size: 10px 10px;
+    background-position: 0 0, 5px 5px;
+}
+
+/* Śruby ozdobne */
 .game-machine-container::before,
 .game-machine-container::after {
     content: '';
@@ -90,174 +94,331 @@ body {
 .game-machine-container::before { left: 15px; }
 .game-machine-container::after { right: 15px; }
 
-
 /* =========================================
-   OKNO BĘBNÓW (Reels Window)
+   ELEMENTY ROZGRYWKI (Blackjack)
 ========================================= */
 
-/* Zewnętrzna ramka okna - stylizowana na wycięcie w skale */
-.slots-window-border {
+.hand-section {
     width: 100%;
-    padding: 10px;
-    background-color: #3E2723;
-    border-radius: 25px;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-    margin-bottom: 25px;
-}
-
-/* Wewnętrzne okno, gdzie "kręcą się" symbole */
-.slots-window-inner {
-    width: 100%;
-    height: 220px; /* Stała wysokość okna */
-    background-color: #c5bfa6; /* Ciemniejsze tło wnętrza */
-    border-radius: 18px;
-    border: 4px solid #2a1a17;
-    box-shadow: inset 0 8px 20px rgba(0,0,0,0.4); /* Głęboki cień wewnętrzny */
-    
     display: flex;
-    justify-content: space-around; /* Rozłożenie bębnów */
+    flex-direction: column;
     align-items: center;
-    overflow: hidden; /* Kluczowe: ukrywa symbole poza obszarem widzenia */
-    position: relative;
+    margin-bottom: 10px;
 }
 
-/* Wizualna linia wygrywająca na środku */
-.payline {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background-color: rgba(255, 112, 67, 0.4); /* Półprzezroczysty pomarańczowy */
-    box-shadow: 0 0 10px rgba(255, 112, 67, 0.6);
-    transform: translateY(-50%);
-    z-index: 5;
-    pointer-events: none; /* Kliknięcia przechodzą przez linię */
+.hand-title {
+    color: #E8F5E9; /* Jasny tekst na ciemnym tle */
+    text-shadow: 2px 2px 0 #1b3316;
+    margin: 0 0 15px 0;
+    font-size: 24px;
 }
 
-/* Pojedynczy bęben */
-.reel {
-    width: 30%; /* Trzy bębny obok siebie */
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* W prawdziwej grze JS, tutaj byłby bardzo wysoki pasek z symbolami,
-       który byśmy przesuwali (transform: translateY) */
-    position: relative; 
-    /* Pionowe separatory między bębnami */
-    border-right: 2px solid rgba(62, 39, 35, 0.2);
-}
-
-.reel:last-child {
-    border-right: none;
-}
-
-/* Kontener na pojedynczy widoczny symbol */
-.symbol-container {
-    width: 85%;
-    height: 85%;
-    background-color: #fcf8e8;
+.score-display {
+    background-color: rgba(0,0,0,0.3);
+    color: #fff;
+    padding: 5px 15px;
     border-radius: 15px;
-    border: 3px solid #79989B; /* Styl ramki z Twojego quizu */
-    box-shadow: 
-        inset 0 0 10px rgba(255,255,255,0.5),
-        0 4px 5px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2; /* Powyżej linii payline */
+    margin-top: 10px;
+    font-size: 18px;
+    border: 2px solid rgba(255,255,255,0.2);
 }
 
-.symbol-img {
-    max-width: 80%;
-    max-height: 80%;
-    object-fit: contain;
-    filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.1));
+.divider {
+    width: 90%;
+    height: 4px;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 2px;
+    margin: 20px 0;
+}
+
+/* Kontener na karty */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    min-height: 120px; /* Rezerwacja miejsca */
+    flex-wrap: wrap;
+}
+
+/* STYL KARTY */
+.card {
+    width: 80px;
+    height: 110px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif; /* Prosta czcionka dla czytelności kart */
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+    position: relative;
+    /* Animacja pojawienia się */
+    animation: dealCard 0.3s ease-out;
+}
+
+@keyframes dealCard {
+    from { transform: translateY(-20px) scale(0.8); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.card.red-suit {
+    color: #d32f2f;
+}
+
+.card-center {
+    font-size: 32px;
+    align-self: center;
+}
+
+.card-value-bottom {
+    transform: rotate(180deg);
+}
+
+/* Rewers karty (zakryta) */
+.card-back {
+    background-color: #3E2723;
+    background-image: repeating-linear-gradient(
+        45deg,
+        #4e342e,
+        #4e342e 10px,
+        #3E2723 10px,
+        #3E2723 20px
+    );
+    border: 2px solid #fff;
 }
 
 /* =========================================
-   PANEL STATUSU I KONTROLI
+   PANEL STEROWANIA
 ========================================= */
 
 .status-display {
-    margin-bottom: 20px;
+    margin: 20px 0;
     text-align: center;
-    min-height: 35px; /* Rezerwacja miejsca, żeby nie skakało */
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 3px solid #3E2723;
+    min-width: 250px;
 }
 
 .status-text {
-    font-family: 'Slackey', sans-serif;
-    font-size: 22px;
-    color: #3E2723;
+    font-size: 20px;
     margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    color: #3E2723;
 }
 
 .controls-panel {
-    width: 100%;
     display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
-/* Przycisk SPIN - Adaptacja stylu .menu-btn (pomarańczowy) */
-.spin-button {
+/* Uniwersalny styl przycisku gry */
+.game-button {
     font-family: 'Slackey', sans-serif;
-    background-color: #FF7043; /* Wyrazisty pomarańcz */
     color: #fff;
-    padding: 15px 80px; /* Duży, masywny przycisk */
-    font-size: 28px;
-    border: 4px solid #BF360C; /* Ciemniejsza obwódka */
-    border-radius: 60px;
+    padding: 12px 30px;
+    font-size: 20px;
+    border: none;
+    border-radius: 12px;
     cursor: pointer;
-    
-    /* Efekt 3D */
-    box-shadow: 
-        0 8px 0 #BF360C, 
-        0 15px 20px rgba(0,0,0,0.2);
-    
     text-transform: uppercase;
-    letter-spacing: 3px;
-    text-shadow: 2px 2px 0 #BF360C;
-    transition: all 0.15s ease-in-out;
-    position: relative;
-    top: 0;
+    letter-spacing: 1px;
+    transition: transform 0.1s, filter 0.1s;
+    box-shadow: 0 5px 0 rgba(0,0,0,0.3);
 }
 
-.spin-button:hover {
-    background-color: #ff8a65;
-    transform: translateY(-2px); /* Lekkie uniesienie */
-    box-shadow: 
-        0 10px 0 #BF360C, 
-        0 20px 25px rgba(0,0,0,0.2);
+.game-button:active {
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.3);
 }
 
-/* Efekt wciśnięcia przycisku */
-.spin-button:active {
-    top: 8px; /* Przesunięcie w dół */
-    box-shadow: 
-        0 0 0 #BF360C, /* Cień znika */
-        inset 0 3px 5px rgba(0,0,0,0.2); /* Wewnętrzny cień wciśnięcia */
-    background-color: #e64a19;
+/* Kolory przycisków */
+.btn-green {
+    background-color: #43A047; /* Hit */
+    border-bottom: 5px solid #2E7D32;
 }
 
-/* Opcjonalnie: stan zablokowany podczas kręcenia */
-.spin-button:disabled {
-    background-color: #bdc3c7;
-    border-color: #7f8c8d;
-    color: #ecf0f1;
-    box-shadow: 0 4px 0 #7f8c8d;
-    cursor: not-allowed;
-    top: 4px;
-    transform: none;
+.btn-red {
+    background-color: #e53935; /* Stand */
+    border-bottom: 5px solid #c62828;
 }
 
-/* Responsywność dla mniejszych ekranów */
+.btn-yellow {
+    background-color: #FFB300; /* New Game */
+    border-bottom: 5px solid #FF6F00;
+    color: #3E2723;
+}
+
+/* Responsywność */
 @media (max-width: 600px) {
-    .page-title-big { font-size: 36px !important; }
-    .game-machine-container { padding: 25px 15px; border-width: 5px; }
-    .slots-window-inner { height: 180px; }
-    .spin-button { padding: 12px 50px; font-size: 22px; }
-    .status-text { font-size: 18px; }
+    .game-machine-container { padding: 15px 10px; }
+    .card { width: 60px; height: 90px; font-size: 14px; }
+    .card-center { font-size: 24px; }
+    .game-button { padding: 10px 20px; font-size: 16px; }
+}
+/*
+=========================================
+   NOWY UKŁAD: AWATAR PO LEWEJ
+========================================= */
+
+/* Zmieniamy kierunek sekcji na poziomy (row) */
+.hand-section.left-layout {
+    flex-direction: row; 
+    align-items: flex-start; /* Wyrównanie do góry */
+    justify-content: flex-start;
+    padding: 10px;
+    width: 100%;
+}
+
+/* Kontener na sam awatar */
+.avatar-wrapper {
+    flex-shrink: 0; /* Nie zmniejszaj awatara */
+    margin-right: 20px; /* Odstęp od kart */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid #5D4037;
+    background-color: #fcf8e8;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+.dealer-img {
+    border-color: #3E2723; /* Ciemniejszy brąz dla krupiera */
+}
+
+.player-img {
+    border-color: #1976D2; /* Niebieski akcent dla gracza */
+}
+
+/* Mała plakietka pod awatarem */
+.avatar-badge {
+    margin-top: -15px; /* Wchodzi na awatar */
+    background: #d32f2f;
+    color: white;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    border: 2px solid #fff;
+    z-index: 2;
+    text-transform: uppercase;
+}
+
+/* Kontener na karty i teksty (prawa strona) */
+.hand-info {
+    flex-grow: 1; /* Zajmuje resztę miejsca obok awatara */
+    display: flex;
+    flex-direction: column;
+    
+    /* ZMIANA TUTAJ: */
+    align-items: center; /* Wyśrodkowanie elementów w pionie */
+    text-align: center;  /* Wyśrodkowanie tekstu */
+}
+
+/* Nadpisujemy cards-container */
+.hand-info .cards-container {
+    /* ZMIANA TUTAJ: */
+    justify-content: center; /* Karty na środku */
+    min-height: 100px;
+    width: 100%; /* Kontener zajmuje całą szerokość, żeby center zadziałał */
+}
+
+.hand-info .hand-title {
+    margin-bottom: 5px;
+    font-size: 20px;
+    /* Usunąłem margin-left/right, bo teraz centrujemy automatycznie */
+}
+
+/* Responsywność dla telefonów (układ pionowy na małym ekranie) */
+@media (max-width: 600px) {
+    .hand-section.left-layout {
+        flex-direction: column; /* Wracamy do pionu */
+        align-items: center;
+    }
+    .avatar-wrapper {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .hand-info {
+        align-items: center;
+        width: 100%;
+    }
+    .hand-info .cards-container {
+        justify-content: center;
+    }
+}
+
+/* =========================================
+   EKRAN WYBORU (OVERLAY)
+========================================= */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(62, 39, 35, 0.95); /* Ciemne tło */
+    z-index: 1000; /* Zawsze na wierzchu */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-content {
+    background-color: #E8E4D5;
+    padding: 40px;
+    border-radius: 20px;
+    border: 8px solid #5D4037;
+    text-align: center;
+    max-width: 90%;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.avatar-selection-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.avatar-option {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.avatar-option:hover {
+    transform: scale(1.1);
+}
+
+.avatar-option img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    object-fit: cover;
+    background-color: #fdf8e6;
+}
+
+.avatar-option p {
+    font-family: 'Slackey', sans-serif;
+    color: #3E2723;
+    margin-top: 5px;
 }

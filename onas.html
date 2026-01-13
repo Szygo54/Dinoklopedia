@@ -3,163 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dino Sloty - Graj i Rycz!</title>
+    <title>Dino Kasyno - Graj i Wygrywaj!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Slackey&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="onas.css">
-
-    <style>
-        .blur-anim {
-            filter: blur(4px);
-            transition: filter 0.1s;
-        }
-    </style>
 </head>
 <body>
 
-    <h1 class="page-title page-title-big">Dino Sloty</h1>
+    <div id="avatar-overlay" class="overlay">
+        <div class="overlay-content">
+            <h1 class="page-title">Wybierz swojego Dinozaura!</h1>
+            <div class="avatar-selection-grid">
+                <div class="avatar-option" onclick="selectAvatar('img/triceratops.png')">
+                    <img src="img/triceratops.png" alt="Triceratops">
+                    <p>Triceratops</p>
+                </div>
+                <div class="avatar-option" onclick="selectAvatar('img/Plezjozaur.png')">
+                    <img src="img/Plezjozaur.png" alt="Plezjozaur">
+                    <p>Plezjozaur</p>
+                </div>
+                <div class="avatar-option" onclick="selectAvatar('img/Stegozaur.png')">
+                    <img src="img/Stegozaur.png" alt="Stegozaur">
+                    <p>Stegozaur</p>
+                </div>
+                <div class="avatar-option" onclick="selectAvatar('img/Brontozaur.png')">
+                    <img src="img/Brontozaur.png" alt="Brontozaur">
+                    <p>Brontozaur</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <main class="game-machine-container">
+    <h1 class="page-title page-title-big">Dino Kasyno</h1>
+
+    <main class="game-machine-container table-felt">
         
-        <div class="slots-window-border">
-            <div class="slots-window-inner">
-                <div class="payline"></div>
+        <div class="hand-section left-layout" id="dealerSection">
+            <div class="avatar-wrapper">
+                <img src="img/T-rex.png" alt="Krupier" class="game-avatar dealer-img">
+                <div class="avatar-badge">BOSS</div>
+            </div>
+            
+            <div class="hand-info">
+                <h2 class="hand-title">Krupier T-Rex</h2>
+                <div class="cards-container" id="dealerCards"></div>
+                <div class="score-display">Wynik: <span id="dealerScore">?</span></div>
+            </div>
+        </div>
 
-                <div class="reel" id="reel-1">
-                    <div class="symbol-container">
-                        <img src="img/T-rex.png" alt="Symbol" class="symbol-img">
-                    </div>
-                </div>
-                
-                <div class="reel" id="reel-2">
-                    <div class="symbol-container">
-                        <img src="img/Plezjozaur.png" alt="Symbol" class="symbol-img">
-                    </div>
-                </div>
-                
-                <div class="reel" id="reel-3">
-                    <div class="symbol-container">
-                        <img src="img/triceratops.png" alt="Symbol" class="symbol-img">
-                    </div>
-                </div>
+        <div class="divider"></div>
 
+        <div class="hand-section left-layout" id="playerSection">
+            <div class="avatar-wrapper">
+                <img id="playerAvatarImg" src="" alt="Twój Dino" class="game-avatar player-img">
+                <div class="avatar-badge" style="background: #1976D2;">TY</div>
+            </div>
+
+            <div class="hand-info">
+                <h2 class="hand-title">Twoja Ręka</h2>
+                <div class="cards-container" id="playerCards"></div>
+                <div class="score-display">Wynik: <span id="playerScore">0</span></div>
             </div>
         </div>
 
         <div class="status-display">
-            <p class="status-text" id="statusText">Zakręć bębnami, aby wygrać!</p>
+            <p class="status-text" id="statusText">Czekam na rozdanie...</p>
         </div>
 
         <div class="controls-panel">
-            <button id="spinBtn" class="spin-button">SPIN!</button>
+            <button id="hitBtn" class="game-button btn-green">Dobierz</button>
+            <button id="standBtn" class="game-button btn-red">Pas</button>
+            <button id="newGameBtn" class="game-button btn-yellow" style="display: none;">Nowa Gra</button>
         </div>
 
     </main>
 
-    <footer class="main-footer">
-        © 2026 Dinoklopedia
-    </footer>
+    <footer class="main-footer">© 2026 Dinoklopedia</footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- 1. USTAWIENIA SYMBOLI ---
-            // Tutaj wpisujesz ścieżki do swoich obrazków.
-            // Na razie dałem linki z internetu, żebyś widział, że gra działa.
-            // Zmień je na: 'img/twoj_plik.png'
-            
-            const symbols = [
-                'img/T-rex.png',      // Twoje zdjęcie T-Rexa
-                'img/Plezjozaur.png',     // Twoje zdjęcie Triceratopsa
-                'img/triceratops.png',      // Twoje zdjęcie Jaja
-                'img/Stegozaur.png',      // Twoje zdjęcie Liścia
-                'img/Brontozaur.png'     // Twoje zdjęcie Wulkanu
-];
+        // --- LOGIKA WYBORU AWATARA ---
+        function selectAvatar(imgSrc) {
+            // Ustaw obrazek gracza
+            document.getElementById('playerAvatarImg').src = imgSrc;
+            // Ukryj ekran wyboru
+            document.getElementById('avatar-overlay').style.display = 'none';
+            // Rozpocznij grę (funkcja z logiki blackjacka poniżej)
+            startGame();
+        }
 
-            // Pobieramy elementy ze strony
-            const spinButton = document.getElementById('spinBtn');
-            const statusText = document.getElementById('statusText');
-            const reels = [
-                document.querySelector('#reel-1 .symbol-img'),
-                document.querySelector('#reel-2 .symbol-img'),
-                document.querySelector('#reel-3 .symbol-img')
-            ];
-            
-            let isSpinning = false; // Czy gra jest w trakcie kręcenia?
+        // --- PONIŻEJ WKLEJ STARĄ LOGIKĘ GRY (JS) ---
+        // (Wklej tutaj cały kod <script> z poprzedniej odpowiedzi, zaczynający się od "const suits = ...")
+        // PAMIĘTAJ: Funkcja startGame() jest teraz wywoływana przez selectAvatar, 
+        // więc usuń wywołanie `startGame()` z samego dołu skryptu, żeby gra nie ruszyła pod spodem zanim wybierzesz postać.
+        
+        // --- SKRÓCONA LOGIKA DO WKLEJENIA (Jeśli nie masz poprzedniej): ---
+        const suits = ['♠', '♥', '♦', '♣'];
+        const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+        let deck = [], playerHand = [], dealerHand = [], gameOver = false;
+        
+        const dealerCardsEl = document.getElementById('dealerCards');
+        const playerCardsEl = document.getElementById('playerCards');
+        const dealerScoreEl = document.getElementById('dealerScore');
+        const playerScoreEl = document.getElementById('playerScore');
+        const statusText = document.getElementById('statusText');
+        const hitBtn = document.getElementById('hitBtn');
+        const standBtn = document.getElementById('standBtn');
+        const newGameBtn = document.getElementById('newGameBtn');
 
-            // Funkcja losująca jeden obrazek z listy
-            function getRandomSymbol() {
-                return symbols[Math.floor(Math.random() * symbols.length)];
+        function createDeck() {
+            deck = [];
+            for (let suit of suits) for (let value of values) deck.push({ suit, value });
+            for (let i = deck.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [deck[i], deck[j]] = [deck[j], deck[i]];
             }
-
-            // Główna funkcja uruchamiana przyciskiem
-            spinButton.addEventListener('click', () => {
-                if (isSpinning) return;
-                
-                isSpinning = true;
-                spinButton.disabled = true; // Blokujemy przycisk
-                statusText.innerText = "Bębny w ruchu... 🦕";
-                statusText.style.color = "#3E2723"; 
-
-                // Czas zatrzymania dla każdego bębna (w milisekundach)
-                const stopTimes = [1500, 2200, 3000]; 
-                const finalResults = [];
-
-                reels.forEach((reel, index) => {
-                    // Dodajemy efekt rozmycia
-                    reel.classList.add('blur-anim');
-
-                    // Rozpoczynamy szybkie zmienianie obrazków (animacja)
-                    const intervalId = setInterval(() => {
-                        reel.src = getRandomSymbol();
-                    }, 100);
-
-                    // Ustawiamy zatrzymanie bębna
-                    setTimeout(() => {
-                        clearInterval(intervalId); // Stop animacji
-                        reel.classList.remove('blur-anim'); // Usuń rozmycie
-                        
-                        // Wylosuj ostateczny wynik
-                        const finalSymbol = getRandomSymbol();
-                        reel.src = finalSymbol;
-                        finalResults[index] = finalSymbol;
-
-                        // Jeśli to ostatni bęben (index 2), sprawdzamy czy wygrana
-                        if (index === 2) {
-                            checkWin(finalResults);
-                        }
-
-                    }, stopTimes[index]);
-                });
+        }
+        function getScore(hand) {
+            let score = 0, aces = 0;
+            for (let card of hand) {
+                if (['J','Q','K'].includes(card.value)) score += 10;
+                else if (card.value === 'A') { aces++; score += 11; }
+                else score += parseInt(card.value);
+            }
+            while (score > 21 && aces > 0) { score -= 10; aces--; }
+            return score;
+        }
+        function createCardElement(card) {
+            const el = document.createElement('div');
+            el.className = 'card' + ((card.suit === '♥' || card.suit === '♦') ? ' red-suit' : '');
+            el.innerHTML = `<div class="card-value-top">${card.value}${card.suit}</div><div class="card-center">${card.suit}</div><div class="card-value-bottom">${card.value}${card.suit}</div>`;
+            return el;
+        }
+        function renderGame(showDealerHidden = false) {
+            dealerCardsEl.innerHTML = ''; playerCardsEl.innerHTML = '';
+            playerHand.forEach(c => playerCardsEl.appendChild(createCardElement(c)));
+            dealerHand.forEach((c, i) => {
+                if (i === 0 && !showDealerHidden) {
+                    let hidden = document.createElement('div'); hidden.className = 'card card-back';
+                    dealerCardsEl.appendChild(hidden);
+                } else dealerCardsEl.appendChild(createCardElement(c));
             });
+            playerScoreEl.innerText = getScore(playerHand);
+            dealerScoreEl.innerText = showDealerHidden ? getScore(dealerHand) : "?";
+        }
+        function startGame() {
+            createDeck();
+            playerHand = [deck.pop(), deck.pop()];
+            dealerHand = [deck.pop(), deck.pop()];
+            gameOver = false;
+            hitBtn.style.display = 'inline-block'; standBtn.style.display = 'inline-block'; newGameBtn.style.display = 'none';
+            statusText.innerText = "Twój ruch!"; statusText.style.color = "#3E2723";
+            renderGame();
+            if (getScore(playerHand) === 21) endGame("Blackjack! Wygrywasz!");
+        }
+        function endGame(msg, color = "#3E2723") {
+            gameOver = true; statusText.innerText = msg; statusText.style.color = color;
+            hitBtn.style.display = 'none'; standBtn.style.display = 'none'; newGameBtn.style.display = 'inline-block';
+            renderGame(true);
+        }
 
-            // Sprawdzanie wygranej
-            function checkWin(results) {
-                isSpinning = false;
-                spinButton.disabled = false; // Odblokuj przycisk
-
-                const [r1, r2, r3] = results;
-
-                // Sprawdzamy, czy wszystkie 3 obrazki (src) są identyczne
-                if (r1 === r2 && r2 === r3) {
-                    statusText.innerHTML = "🎉 ROARRR! WIELKA WYGRANA! 🎉";
-                    statusText.style.color = "#d32f2f"; // Czerwony kolor wygranej
-                    
-                    // Mały efekt wizualny na przycisku
-                    spinButton.style.backgroundColor = "#FFD700";
-                    setTimeout(() => { spinButton.style.backgroundColor = ""; }, 2000);
-                } else {
-                    const loseTexts = [
-                        "Pudło! Spróbuj jeszcze raz.", 
-                        "Blisko! Ale nie tym razem.", 
-                        "Dinozaury uciekły... Kręć dalej!"
-                    ];
-                    statusText.innerText = loseTexts[Math.floor(Math.random() * loseTexts.length)];
-                    statusText.style.color = "#3E2723";
-                }
-            }
+        hitBtn.addEventListener('click', () => {
+            if (gameOver) return;
+            playerHand.push(deck.pop());
+            renderGame();
+            if (getScore(playerHand) > 21) endGame("Przeholowałeś!", "#d32f2f");
         });
+        standBtn.addEventListener('click', () => {
+            if (gameOver) return;
+            while (getScore(dealerHand) < 17) dealerHand.push(deck.pop());
+            const p = getScore(playerHand), d = getScore(dealerHand);
+            renderGame(true);
+            if (d > 21 || p > d) endGame("Wygrywasz!", "#388E3C");
+            else if (p < d) endGame("Przegrywasz.", "#d32f2f");
+            else endGame("Remis.", "#F57F17");
+        });
+        newGameBtn.addEventListener('click', startGame);
     </script>
 </body>
 </html>
