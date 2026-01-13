@@ -1,21 +1,26 @@
-/* =========================================
-   1. USTAWIENIA OGÓLNE I TŁO STRONY
-   ========================================= */
-   body {
+/* --- USTAWIENIA OGÓLNE --- */
+* {
+    box-sizing: border-box;
+}
+
+body {
     background-image: url('img/tło.jpg'); 
     background-repeat: repeat; 
     background-size: 340px; 
     background-color: #fdf8e6; 
-    
+
     font-family: 'Slackey', sans-serif;
     margin: 0;
     padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center; 
-    min-height: 90vh;
+    /* ZMIANA: Dodajemy to, żeby wyśrodkować wszystko w pionie na stronie */
+    justify-content: center; 
+    min-height: 100vh;
 }
 
+/* --- STOPKA --- */
 .main-footer {
     margin-top: auto; 
     padding-top: 15px; 
@@ -27,13 +32,11 @@
     letter-spacing: 1px;
 }
 
-/* =========================================
-   2. TYTUŁY
-   ========================================= */
+/* --- TYTUŁY --- */
 .page-title {
     text-transform: uppercase;
     font-weight: normal;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* Zmniejszony odstęp */
     margin-top: 10px;
     color: #3E2723;
     font-size: 36px;
@@ -44,82 +47,83 @@
 }
 
 .page-title-big {
-    font-size: 60px !important;
-    margin-bottom: 30px;
+    font-size: 50px !important; /* Trochę mniejszy niż wcześniej (60px) */
+    margin-bottom: 20px;
     text-shadow: 4px 4px 0 #fff;
 }
 
-/* =========================================
-   3. GŁÓWNY KONTENER QUIZU
-   ========================================= */
+/* --- GŁÓWNY KONTENER QUIZU (BOX) --- */
 .quiz-container {
+    /* ... (to zostaje bez zmian) ... */
     width: 100%;
     max-width: 1250px;
     background-color: #E8E4D5;
     border-radius: 30px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    
-    padding: 30px;
+    padding: 20px; 
     margin: 0 auto;
-    
     display: flex;
     flex-direction: column;
     align-items: center;
     box-sizing: border-box; 
 }
 
-/* --- Stan dla ekranu końcowego (centrowanie) --- */
+/* --- Stan dla ekranu końcowego (TO JEST TA WAŻNA ZMIANA) --- */
 .quiz-container.score-view {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centrowanie PIONOWE */
-    align-items: center;     /* Centrowanie POZIOME */
-    min-height: 50vh;        /* Minimalna wysokość, żeby było widać środek */
-    padding-top: 0;
+    justify-content: center;
+    align-items: center;    
+    
+    /* ZMIANA: Zwiększamy minimalną wysokość boxa (było 40vh) */
+    min-height: 60vh; 
+    
+    /* ZMIANA: Zwiększamy odstęp wewnątrz, żeby box był "tłustszy" */
+    padding: 50px; 
 }
 
-/* Styl tekstu wyniku (brązowy i większy) */
 .quiz-container.score-view .question-text {
     font-size: 32px;
-    margin-bottom: 40px;
+    margin-bottom: 40px; /* Zwiększyłem odstęp pod wynikiem */
     font-weight: bold;
-    color: #3E2723; /* Ciemny brąz */
+    color: #3E2723;
 }
 
-/* --- ZDJĘCIE DOPASOWANE (CAŁE WIDOCZNE) --- */
+/* --- ZDJĘCIE --- */
 .quiz-image {
     width: 100%;           
-    max-width: 640px;      /* Szerokość: 600px */
-    aspect-ratio: 2 / 1;   /* Proporcje: 2:1 (600x300) */
+    /* ZMIANA: Zmniejszona szerokość maksymalna (było 640px) -> to zmniejsza też wysokość */
+    max-width: 500px;      
+    aspect-ratio: 2 / 1;   
     height: auto;
     
-    /* ZMIANA TUTAJ: */
-    object-fit: contain;   /* Zdjęcie dopasuje się w całości (nie utnie boków) */
+    object-fit: contain;   
     
-    background-color: #ccc; /* Kolor tła widoczny, jeśli zdjęcie ma inne proporcje */
-    margin-bottom: 20px;
+    background-color: #ccc; 
+    /* ZMIANA: Mniejszy odstęp pod zdjęciem */
+    margin-bottom: 15px; 
     border-radius: 20px; 
     box-shadow: 0 5px 10px rgba(0,0,0,0.15); 
     border: 4px solid #fff;
 }
 
+/* --- TREŚĆ PYTANIA --- */
 .question-text {
     font-family: 'Slackey', sans-serif;
     font-size: 20px;
     color: #3E2723;
-    margin-bottom: 25px;
+    /* ZMIANA: Mniejszy odstęp pod pytaniem */
+    margin-bottom: 15px; 
     line-height: 1.4;
     text-transform: uppercase;
     text-align: center;
     padding: 0 10px;
 }
 
-/* =========================================
-   4. PRZYCISKI QUIZU
-   ========================================= */
+/* --- PRZYCISKI ODPOWIEDZI --- */
 .answer-buttons {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Domyślnie: 2 kolumny */
+    grid-template-columns: 1fr 1fr; 
     gap: 15px;
     width: 100%;
 }
@@ -162,6 +166,7 @@
     color: white;
 }
 
+/* --- GUZIKI NAWIGACJI (DALEJ / MENU) --- */
 .next-btn, .menu-btn {
     font-family: 'Slackey', sans-serif;
     color: #fff;
@@ -175,7 +180,7 @@
 
 .next-btn {
     background-color: #3E2723;
-    margin-top: 25px;
+    margin-top: 20px; /* Nieco mniejszy margines */
     box-shadow: 0 4px 0 #251614;
 }
 
@@ -191,9 +196,7 @@
     transform: scale(1.05);
 }
 
-/* =========================================
-   5. EKRAN STARTOWY (POPRAWIONY)
-   ========================================= */
+/* --- EKRAN STARTOWY (OVERLAY) --- */
 .overlay {
     position: fixed;
     top: 0;
@@ -216,7 +219,7 @@
 
 .overlay-content {
     background-color: #E8E4D5;
-    padding: 60px 40px; 
+    padding: 40px 30px; /* Zmniejszony padding */
     border-radius: 30px;
     text-align: center;
     box-shadow: 0 0 50px rgba(0,0,0,0.5);
@@ -229,13 +232,13 @@
 .overlay-content h2 {
     font-family: 'Slackey', sans-serif;
     color: #3E2723;
-    font-size: 42px;
+    font-size: 36px; /* Mniejszy font */
     margin-top: 0;
     margin-bottom: 20px;
 }
 
 .overlay-content p {
-    font-size: 24px;   
+    font-size: 22px;   
     color: #5D4037;    
     margin-bottom: 15px;
     margin-top: 0;
@@ -243,14 +246,14 @@
 
 .overlay-content input {
     font-family: 'Slackey', sans-serif;
-    font-size: 28px;
-    padding: 15px;
+    font-size: 24px;
+    padding: 12px;
     border-radius: 15px;
     border: 3px solid #79989B;
     text-align: center;
     width: 80%;
-    max-width: 500px; 
-    margin-bottom: 30px;
+    max-width: 400px; 
+    margin-bottom: 25px;
     box-sizing: border-box;
 }
 
@@ -258,13 +261,13 @@
     font-family: 'Slackey', sans-serif;
     background-color: #8c9451; 
     color: white;
-    padding: 20px 50px;
-    font-size: 26px;
+    padding: 15px 40px;
+    font-size: 24px;
     border: none;
     border-radius: 50px;
     cursor: pointer;
     box-shadow: 0 6px 0 #585e2f; 
-    min-width: 250px;
+    min-width: 200px;
 }
 
 .start-btn:hover { 
@@ -276,6 +279,8 @@
     80% { transform: scale(1.1); }
     100% { transform: scale(1); opacity: 1; }
 }
+
+/* --- RESPONSYWNOŚĆ (TELEFONY) --- */
 @media (max-width: 600px) {
     .page-title {
         font-size: 28px;
@@ -287,7 +292,7 @@
     }
 
     .quiz-container {
-        padding: 20px 15px; 
+        padding: 15px; 
     }
 
     .question-text {
