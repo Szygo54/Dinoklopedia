@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Slackey&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Slackey&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="quiz.css">
 </head>
@@ -18,7 +18,7 @@
     <div id="startScreen" class="overlay">
         <div class="overlay-content">
             <h2>Witaj w DinoQuizie!</h2>
-            <p style="font-family: 'Slackey', sans-serif; color: #5D4037;">Podaj swoje imię, Odkrywco:</p>
+            <p>Podaj swoje imię, Odkrywco:</p>
             <input type="text" id="playerNameInput" placeholder="Twoje imię..." maxlength="12">
             <br>
             <button id="startGameBtn" class="start-btn">ROZPOCZNIJ QUIZ</button>
@@ -116,26 +116,18 @@
                 ]
             }
         ];
-
-        // --- 3. OBSŁUGA EKRANU STARTOWEGO ---
         startBtn.addEventListener('click', () => {
             const name = nameInput.value.trim();
             if (name === "") {
                 alert("Proszę wpisz imię, żeby zacząć!");
             } else {
                 currentPlayerName = name; 
-                startScreen.style.display = 'none'; // Ukryj ekran startowy
+                startScreen.style.display = 'none';
             }
         });
-
-        // --- 4. FUNKCJE GRY ---
-
         function startQuiz() {
             titleElement.classList.remove("page-title-big");
-            
-            // RESETOWANIE STYLU (USUWANIE CENTROWANIA)
             quizContainer.classList.remove("score-view"); 
-
             currentQuestionIndex = 0;
             score = 0;
             nextButton.innerHTML = "KOLEJNE PYTANIE";
@@ -151,7 +143,6 @@
             questionElement.innerHTML = questionNo + ". " + currentQuestion.pytanie;
 
             imageElement.src = currentQuestion.obrazek;
-            // Zabezpieczenie: jeśli nie ma obrazka, wczytaj domyślny
             imageElement.onerror = function() { this.src = 'img/triceratops.png'; }; 
 
             currentQuestion.odpowiedzi.forEach(answer => {
@@ -197,12 +188,8 @@
         function showScore() {
             resetState();
             imageElement.style.display = "none"; 
-            
-            // WŁĄCZAMY CENTROWANIE EKRANU KOŃCOWEGO
             quizContainer.classList.add("score-view");
-
             questionElement.innerHTML = `GRATULACJE ${currentPlayerName.toUpperCase()}!<br>Twój wynik to ${score} na ${pytania.length}!`;
-            
             titleElement.classList.add("page-title-big");
             nextButton.innerHTML = "ZAGRAJ JESZCZE RAZ";
             nextButton.style.display = "inline-block";
@@ -230,8 +217,6 @@
         menuButton.addEventListener("click", () => {
             window.location.href = "quizmenu.html"; 
         });
-
-        // Startujemy
         startQuiz();
     </script>
 </body>

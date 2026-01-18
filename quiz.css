@@ -226,14 +226,14 @@ body {
 }
 .overlay-content p {
     font-family: 'Caveat Brush', cursive; 
-    font-size: 22px;   
+    font-size: 36px;
     color: #5D4037;    
     margin-bottom: 15px;
     margin-top: 0;
 }
 .overlay-content input {
     font-family: 'Caveat Brush', cursive;
-    font-size: 24px;
+    font-size: 29px;
     padding: 12px;
     border-radius: 15px;
     border: 3px solid #79989B;
@@ -288,7 +288,7 @@ body {
     }
 
     .question-text {
-        font-size: 18px;
+        font-size: 23px;
         margin-bottom: 15px;
     }
 
