@@ -33,7 +33,6 @@
     </footer>
 
     <script>
-        // Nazwy plików bazowych (wersje na komputer)
         const slajdyBaza = ['baner', 'baner2', 'baner3']; 
     
         let aktualnyNumer = 0;
@@ -42,21 +41,18 @@
         const baner = document.getElementById('baner');
         const kropki = document.querySelectorAll('.dot'); 
     
-        // Sprawdzamy, czy użytkownik jest na telefonie (szerokość <= 768px)
         function czyTelefon() {
             return window.innerWidth <= 768;
         }
 
-        // Funkcja budująca nazwę pliku w zależności od urządzenia
+
         function pobierzSciezke(index) {
             let nazwaBazowa = slajdyBaza[index];
             
             if (czyTelefon()) {
-                // Na telefonie szukamy plików: baner1tel.png, baner2tel.png...
                 if(index === 0) nazwaBazowa = 'baner1'; 
                 return `img/${nazwaBazowa}tel.png`;
             } else {
-                // Na komputerze: baner.png, baner2.png...
                 return `img/${slajdyBaza[index]}.png`;
             }
         }
@@ -84,8 +80,7 @@
             baner.style.backgroundImage = `url('${pobierzSciezke(aktualnyNumer)}')`;
             aktualizujKropki(aktualnyNumer);
         }
-    
-        // Klikanie w kropki
+
         kropki.forEach((kropka, index) => {
             kropka.addEventListener('click', () => {
                 zmienSlajd(index);
@@ -94,12 +89,10 @@
             });
         }); 
 
-        // Gdy obrócisz telefon, tło zaktualizuje się automatycznie
         window.addEventListener('resize', () => {
              baner.style.backgroundImage = `url('${pobierzSciezke(aktualnyNumer)}')`;
         });
-    
-        // Start slidera
+
         zmienSlajd(0);
         timer = setInterval(() => zmienSlajd(), 4000);
     
