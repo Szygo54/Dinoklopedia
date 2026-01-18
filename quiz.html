@@ -62,7 +62,6 @@
         let currentQuestionIndex = 0;
         let score = 0;
 
-        // Baza pytań
         const pytania = [
             {
                 pytanie: "Który dinozaur miał bardzo długą szyję, żeby sięgać do wysokich liści?",
@@ -145,7 +144,6 @@
             questionElement.innerHTML = questionNo + ". " + currentQuestion.pytanie;
 
             imageElement.src = currentQuestion.obrazek;
-            // Fallback, jeśli obrazek się nie załaduje
             imageElement.onerror = function() { this.src = 'img/triceratops.png'; }; 
 
             currentQuestion.odpowiedzi.forEach(answer => {

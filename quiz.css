@@ -1,8 +1,6 @@
-/* --- USTAWIENIA OGÓLNE --- */
 * {
     box-sizing: border-box;
 }
-
 body {
     background-image: url('img/tło.jpg'); 
     background-repeat: repeat; 
@@ -18,8 +16,6 @@ body {
     justify-content: center; 
     min-height: 100vh;
 }
-
-/* --- PRZYCISK WRÓĆ (Nowość) --- */
 .btn-back {
     position: absolute;
     top: 20px;
@@ -34,8 +30,6 @@ body {
     box-shadow: 0 4px 0 rgba(0,0,0,0.1);
     transition: transform 0.2s;
     font-weight: bold;
-    
-    /* Bardzo ważny z-index, żeby był nad ekranem startowym */
     z-index: 10000; 
 }
 
@@ -43,8 +37,6 @@ body {
     transform: scale(1.05);
     background-color: #ece9d9;
 }
-
-/* --- STOPKA --- */
 .main-footer {
     margin-top: auto; 
     padding-top: 15px; 
@@ -55,8 +47,6 @@ body {
     opacity: 0.8; 
     letter-spacing: 1px;
 }
-
-/* --- TYTUŁY --- */
 .page-title {
     text-transform: uppercase;
     font-weight: normal;
@@ -75,8 +65,6 @@ body {
     margin-bottom: 20px;
     text-shadow: 4px 4px 0 #fff;
 }
-
-/* --- GŁÓWNY KONTENER QUIZU (BOX) --- */
 .quiz-container {
     width: 100%;
     max-width: 1250px;
@@ -90,8 +78,6 @@ body {
     align-items: center;
     box-sizing: border-box; 
 }
-
-/* --- Stan dla ekranu końcowego --- */
 .quiz-container.score-view {
     display: flex;
     flex-direction: column;
@@ -107,8 +93,6 @@ body {
     font-weight: bold;
     color: #3E2723;
 }
-
-/* --- ZDJĘCIE --- */
 .quiz-image {
     width: 100%;           
     max-width: 500px;      
@@ -121,8 +105,6 @@ body {
     box-shadow: 0 5px 10px rgba(0,0,0,0.15); 
     border: 4px solid #fff;
 }
-
-/* --- TREŚĆ PYTANIA --- */
 .question-text {
     font-family: 'Slackey', sans-serif;
     font-size: 20px;
@@ -133,8 +115,6 @@ body {
     text-align: center;
     padding: 0 10px;
 }
-
-/* --- PRZYCISKI ODPOWIEDZI --- */
 .answer-buttons {
     display: grid;
     grid-template-columns: 1fr 1fr; 
@@ -179,8 +159,6 @@ body {
     box-shadow: 0 4px 0 #C62828;
     color: white;
 }
-
-/* --- GUZIKI NAWIGACJI (DALEJ / MENU) --- */
 .next-btn, .menu-btn {
     font-family: 'Slackey', sans-serif;
     color: #fff;
@@ -191,25 +169,21 @@ body {
     cursor: pointer;
     display: none; 
 }
-
 .next-btn {
     background-color: #3E2723;
     margin-top: 20px; 
     box-shadow: 0 4px 0 #251614;
 }
-
 .menu-btn {
-    background-color: #FF7043; 
+    background-color: #D99A4E; 
     margin-top: 15px; 
-    box-shadow: 0 4px 0 #BF360C;
+    box-shadow: 0 4px 0 #936732;
     color: #3E2723; 
     font-weight: bold;
 }
-
 .next-btn:hover, .menu-btn:hover {
     transform: scale(1.05);
 }
-
 .overlay {
     position: fixed;
     top: 0;
@@ -229,7 +203,6 @@ body {
     padding: 20px;
     box-sizing: border-box;
 }
-
 .overlay-content {
     background-color: #E8E4D5;
     padding: 40px 30px; 
@@ -241,7 +214,6 @@ body {
     max-width: 800px; 
     box-sizing: border-box;
 }
-
 .overlay-content h2 {
     font-family: 'Slackey', sans-serif;
     color: #3E2723;
@@ -249,14 +221,12 @@ body {
     margin-top: 0;
     margin-bottom: 20px;
 }
-
 .overlay-content p {
     font-size: 22px;   
     color: #5D4037;    
     margin-bottom: 15px;
     margin-top: 0;
 }
-
 .overlay-content input {
     font-family: 'Slackey', sans-serif;
     font-size: 24px;
@@ -269,7 +239,6 @@ body {
     margin-bottom: 25px;
     box-sizing: border-box;
 }
-
 .start-btn {
     font-family: 'Slackey', sans-serif;
     background-color: #8c9451; 
@@ -282,11 +251,9 @@ body {
     box-shadow: 0 6px 0 #585e2f; 
     min-width: 200px;
 }
-
 .start-btn:hover { 
     transform: scale(1.05); 
 }
-
 @keyframes popIn {
     0% { transform: scale(0); opacity: 0; }
     80% { transform: scale(1.1); }
@@ -329,6 +296,7 @@ body {
         width: 100%; 
         padding: 12px 0;
         box-sizing: border-box;
+        font-size: 18px;
     }
 
     .overlay-content {
