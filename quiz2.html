@@ -7,11 +7,13 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Chewy&family=Slackey&family=Titan+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Slackey&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="quiz.css">
 </head>
 <body>
+
+    <a href="main.html" class="btn-back">← Menu</a>
 
     <div id="startScreen" class="overlay">
         <div class="overlay-content">
@@ -45,12 +47,11 @@
     </footer>
 
     <script>
-        // --- 1. ZMIENNE I ELEMENTY ---
         const startScreen = document.getElementById('startScreen');
         const startBtn = document.getElementById('startGameBtn');
         const nameInput = document.getElementById('playerNameInput');
         
-        const quizContainer = document.querySelector('.quiz-container'); // Ważne do centrowania
+        const quizContainer = document.querySelector('.quiz-container');
         const questionElement = document.getElementById("question");
         const imageElement = document.getElementById("quiz-img");
         const answerButtons = document.getElementById("answer-buttons");
@@ -62,7 +63,7 @@
         let currentQuestionIndex = 0;
         let score = 0;
 
-        // --- 2. DANE PYTAŃ ---
+
         const pytania = [
             {
                 pytanie: "Który z tych dinozaurów jest uważany za jednego z największych drapieżników, nawet większego od T-Rexa, i miał charakterystyczny 'żagiel' na grzbiecie?",
@@ -95,13 +96,13 @@
                 ]
             },
             {
-                pytanie: "Co się stało, że wielkie dinozaury zniknęły z Ziemi?",
+                pytanie: "Co oznacza słowo dinozaur?",
                 obrazek: "img/quiz9.png", 
                 odpowiedzi: [
-                    { text: "Wyjechały na wakacje", correct: false },
-                    { text: "Schowały się pod ziemią i tam śpią", correct: false },
-                    { text: "Uderzyła w Ziemię wielka asteroida", correct: true },
-                    { text: "Odleciały rakietą w kosmos", correct: false }
+                    { text: "Kamienny potwór", correct: false },
+                    { text: "Szybki biegacz", correct: false },
+                    { text: "Straszny jaszczur", correct: true },
+                    { text: "Wielki ptak", correct: false }
                 ]
             },
             {

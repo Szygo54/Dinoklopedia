@@ -7,11 +7,12 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Chewy&family=Slackey&family=Titan+One&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Slackey&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="quiz.css">
 </head>
 <body>
+
+    <a href="quizmenu.html" class="btn-back">← Menu</a>
 
     <div id="startScreen" class="overlay">
         <div class="overlay-content">
@@ -45,12 +46,11 @@
     </footer>
 
     <script>
-
         const startScreen = document.getElementById('startScreen');
         const startBtn = document.getElementById('startGameBtn');
         const nameInput = document.getElementById('playerNameInput');
         
-        const quizContainer = document.querySelector('.quiz-container'); // Ważne do centrowania
+        const quizContainer = document.querySelector('.quiz-container'); 
         const questionElement = document.getElementById("question");
         const imageElement = document.getElementById("quiz-img");
         const answerButtons = document.getElementById("answer-buttons");
@@ -62,7 +62,7 @@
         let currentQuestionIndex = 0;
         let score = 0;
 
-        // --- 2. DANE PYTAŃ ---
+        // Baza pytań
         const pytania = [
             {
                 pytanie: "Który dinozaur miał bardzo długą szyję, żeby sięgać do wysokich liści?",
@@ -116,23 +116,18 @@
             }
         ];
 
-        // --- 3. OBSŁUGA EKRANU STARTOWEGO ---
         startBtn.addEventListener('click', () => {
             const name = nameInput.value.trim();
             if (name === "") {
                 alert("Proszę wpisz imię, żeby zacząć!");
             } else {
                 currentPlayerName = name; 
-                startScreen.style.display = 'none'; // Ukryj ekran startowy
+                startScreen.style.display = 'none'; 
             }
         });
 
-        // --- 4. FUNKCJE GRY ---
-
         function startQuiz() {
             titleElement.classList.remove("page-title-big");
-            
-            // RESETOWANIE STYLU (USUWANIE CENTROWANIA)
             quizContainer.classList.remove("score-view"); 
 
             currentQuestionIndex = 0;
@@ -150,7 +145,7 @@
             questionElement.innerHTML = questionNo + ". " + currentQuestion.pytanie;
 
             imageElement.src = currentQuestion.obrazek;
-            // Zabezpieczenie: jeśli nie ma obrazka, wczytaj domyślny
+            // Fallback, jeśli obrazek się nie załaduje
             imageElement.onerror = function() { this.src = 'img/triceratops.png'; }; 
 
             currentQuestion.odpowiedzi.forEach(answer => {
@@ -197,7 +192,6 @@
             resetState();
             imageElement.style.display = "none"; 
             
-            // WŁĄCZAMY CENTROWANIE EKRANU KOŃCOWEGO
             quizContainer.classList.add("score-view");
 
             questionElement.innerHTML = `GRATULACJE ${currentPlayerName.toUpperCase()}!<br>Twój wynik to ${score} na ${pytania.length}!`;
@@ -230,7 +224,6 @@
             window.location.href = "main.html"; 
         });
 
-        // Startujemy
         startQuiz();
     </script>
 </body>
