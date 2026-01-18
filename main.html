@@ -2,11 +2,12 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dinoklopedia</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Chewy&family=Slackey&family=Titan+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Slackey&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="main.css">
 </head>
@@ -32,17 +33,33 @@
     </footer>
 
     <script>
-        const slajdy = [
-            { zdjecie: 'img/baner.png' },
-            { zdjecie: 'img/baner2.png' },
-            { zdjecie: 'img/baner3.png' }
-        ];
+        // Nazwy plików bazowych (wersje na komputer)
+        const slajdyBaza = ['baner', 'baner2', 'baner3']; 
     
         let aktualnyNumer = 0;
         let timer; 
         
         const baner = document.getElementById('baner');
         const kropki = document.querySelectorAll('.dot'); 
+    
+        // Sprawdzamy, czy użytkownik jest na telefonie (szerokość <= 768px)
+        function czyTelefon() {
+            return window.innerWidth <= 768;
+        }
+
+        // Funkcja budująca nazwę pliku w zależności od urządzenia
+        function pobierzSciezke(index) {
+            let nazwaBazowa = slajdyBaza[index];
+            
+            if (czyTelefon()) {
+                // Na telefonie szukamy plików: baner1tel.png, baner2tel.png...
+                if(index === 0) nazwaBazowa = 'baner1'; 
+                return `img/${nazwaBazowa}tel.png`;
+            } else {
+                // Na komputerze: baner.png, baner2.png...
+                return `img/${slajdyBaza[index]}.png`;
+            }
+        }
     
         function aktualizujKropki(numer) {
             kropki.forEach((kropka, index) => {
@@ -57,21 +74,18 @@
         function zmienSlajd(nowyNumer) {
             if (nowyNumer === undefined) {
                 aktualnyNumer++;
-                if (aktualnyNumer >= slajdy.length) {
+                if (aktualnyNumer >= slajdyBaza.length) {
                     aktualnyNumer = 0;
                 }
             } else {
                 aktualnyNumer = nowyNumer;
             }
     
-            const nowySlajd = slajdy[aktualnyNumer];
-    
-            baner.style.backgroundImage = `url('${nowySlajd.zdjecie}')`;
-            
+            baner.style.backgroundImage = `url('${pobierzSciezke(aktualnyNumer)}')`;
             aktualizujKropki(aktualnyNumer);
         }
     
-        // Obsługa kliknięć w kropki
+        // Klikanie w kropki
         kropki.forEach((kropka, index) => {
             kropka.addEventListener('click', () => {
                 zmienSlajd(index);
@@ -79,9 +93,13 @@
                 timer = setInterval(() => zmienSlajd(), 5000);
             });
         }); 
+
+        // Gdy obrócisz telefon, tło zaktualizuje się automatycznie
+        window.addEventListener('resize', () => {
+             baner.style.backgroundImage = `url('${pobierzSciezke(aktualnyNumer)}')`;
+        });
     
-        // --- NAPRAWA PONIŻEJ ---
-        
+        // Start slidera
         zmienSlajd(0);
         timer = setInterval(() => zmienSlajd(), 4000);
     
