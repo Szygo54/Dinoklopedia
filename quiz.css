@@ -15,9 +15,33 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center; 
-    /* ZMIANA: Dodajemy to, żeby wyśrodkować wszystko w pionie na stronie */
     justify-content: center; 
     min-height: 100vh;
+}
+
+/* --- PRZYCISK WRÓĆ (Nowość) --- */
+.btn-back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+    color: #3E2723;
+    font-family: 'Slackey', sans-serif;
+    font-size: 18px;
+    background: #FAf6EA;
+    padding: 10px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    font-weight: bold;
+    
+    /* Bardzo ważny z-index, żeby był nad ekranem startowym */
+    z-index: 10000; 
+}
+
+.btn-back:hover {
+    transform: scale(1.05);
+    background-color: #ece9d9;
 }
 
 /* --- STOPKA --- */
@@ -36,7 +60,7 @@ body {
 .page-title {
     text-transform: uppercase;
     font-weight: normal;
-    margin-bottom: 10px; /* Zmniejszony odstęp */
+    margin-bottom: 10px; 
     margin-top: 10px;
     color: #3E2723;
     font-size: 36px;
@@ -47,14 +71,13 @@ body {
 }
 
 .page-title-big {
-    font-size: 50px !important; /* Trochę mniejszy niż wcześniej (60px) */
+    font-size: 50px !important; 
     margin-bottom: 20px;
     text-shadow: 4px 4px 0 #fff;
 }
 
 /* --- GŁÓWNY KONTENER QUIZU (BOX) --- */
 .quiz-container {
-    /* ... (to zostaje bez zmian) ... */
     width: 100%;
     max-width: 1250px;
     background-color: #E8E4D5;
@@ -68,23 +91,19 @@ body {
     box-sizing: border-box; 
 }
 
-/* --- Stan dla ekranu końcowego (TO JEST TA WAŻNA ZMIANA) --- */
+/* --- Stan dla ekranu końcowego --- */
 .quiz-container.score-view {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;    
-    
-    /* ZMIANA: Zwiększamy minimalną wysokość boxa (było 40vh) */
     min-height: 60vh; 
-    
-    /* ZMIANA: Zwiększamy odstęp wewnątrz, żeby box był "tłustszy" */
     padding: 50px; 
 }
 
 .quiz-container.score-view .question-text {
     font-size: 32px;
-    margin-bottom: 40px; /* Zwiększyłem odstęp pod wynikiem */
+    margin-bottom: 40px; 
     font-weight: bold;
     color: #3E2723;
 }
@@ -92,15 +111,11 @@ body {
 /* --- ZDJĘCIE --- */
 .quiz-image {
     width: 100%;           
-    /* ZMIANA: Zmniejszona szerokość maksymalna (było 640px) -> to zmniejsza też wysokość */
     max-width: 500px;      
     aspect-ratio: 2 / 1;   
     height: auto;
-    
     object-fit: contain;   
-    
     background-color: #ccc; 
-    /* ZMIANA: Mniejszy odstęp pod zdjęciem */
     margin-bottom: 15px; 
     border-radius: 20px; 
     box-shadow: 0 5px 10px rgba(0,0,0,0.15); 
@@ -112,7 +127,6 @@ body {
     font-family: 'Slackey', sans-serif;
     font-size: 20px;
     color: #3E2723;
-    /* ZMIANA: Mniejszy odstęp pod pytaniem */
     margin-bottom: 15px; 
     line-height: 1.4;
     text-transform: uppercase;
@@ -180,7 +194,7 @@ body {
 
 .next-btn {
     background-color: #3E2723;
-    margin-top: 20px; /* Nieco mniejszy margines */
+    margin-top: 20px; 
     box-shadow: 0 4px 0 #251614;
 }
 
@@ -219,7 +233,7 @@ body {
 
 .overlay-content {
     background-color: #E8E4D5;
-    padding: 40px 30px; /* Zmniejszony padding */
+    padding: 40px 30px; 
     border-radius: 30px;
     text-align: center;
     box-shadow: 0 0 50px rgba(0,0,0,0.5);
@@ -232,7 +246,7 @@ body {
 .overlay-content h2 {
     font-family: 'Slackey', sans-serif;
     color: #3E2723;
-    font-size: 36px; /* Mniejszy font */
+    font-size: 36px; 
     margin-top: 0;
     margin-bottom: 20px;
 }
@@ -282,9 +296,19 @@ body {
 
 /* --- RESPONSYWNOŚĆ (TELEFONY) --- */
 @media (max-width: 600px) {
+    /* Dostosowanie przycisku powrotu */
+    .btn-back {
+        top: 10px;
+        left: 10px;
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+
     .page-title {
         font-size: 28px;
         margin-bottom: 10px;
+        /* Większy margines od góry, żeby nie nachodził na przycisk */
+        margin-top: 40px; 
     }
 
     .page-title-big {
