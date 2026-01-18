@@ -5,14 +5,11 @@ body {
     font-family: 'Slackey', sans-serif;
     margin: 0;
     padding-top: 20px;
-    
-    /* ZMIANY DLA STOPKI NA DOLE: */
     display: flex;
     flex-direction: column;
     align-items: center; 
-    min-height: 100vh; /* Rozciąga stronę na całą wysokość ekranu */
-    box-sizing: border-box; /* Zapobiega problemom z marginesami */
-    padding-bottom: 0; /* Resetujemy dolny padding body */
+    box-sizing: border-box;
+    padding-bottom: 0;
 }
 
 .hero-box {
@@ -67,7 +64,6 @@ body {
     max-width: 1250px; 
     padding: 0 10px;
     box-sizing: border-box;
-    /* Margines dolny, żeby przyciski nie dotykały stopki, jeśli ekran jest mały */
     margin-bottom: 20px; 
 }
 
@@ -93,7 +89,6 @@ body {
 .btn-art { background-color: #D99A4E; }
 .btn-quiz { background-color: #BFBA75; }
 .btn-about { background-color: #727FA6; }
-
 .nav-btn:hover {
     transform: translateY(-5px);
     filter: brightness(0.9);    
@@ -101,9 +96,7 @@ body {
 }
 
 .main-footer {
-
     margin-top: auto; 
-    
     width: 100%;
     padding-top: 15px; 
     padding-bottom: 15px;
@@ -113,8 +106,6 @@ body {
     opacity: 0.9; 
     letter-spacing: 1px;
 }
-
-/* --- RESPONSYWNOŚĆ (TELEFONY) --- */
 @media (max-width: 768px) {
     .hero-box {
         height: auto;
@@ -122,11 +113,9 @@ body {
         width: 95%; 
         border-radius: 20px;
     }
-
     .nav-container {
         gap: 10px; 
     }
-
     .nav-btn {
         min-width: 40%; 
         width: 45%; 
