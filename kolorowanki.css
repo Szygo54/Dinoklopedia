@@ -122,9 +122,9 @@ body {
     opacity: 0.8; 
 }
 
-@media (max-width: 850px) {
+@media (max-width: 600px) {
     .page-title {
-        font-size: 30px; 
+        font-size: 25px; 
         margin-top: 60px;
     }
 
