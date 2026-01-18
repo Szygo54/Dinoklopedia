@@ -1,424 +1,172 @@
-/* =========================================
-   STYLE BAZOWE
-========================================= */
+/* --- USTAWIENIA OGÓLNE --- */
+* {
+    box-sizing: border-box;
+}
 
 body {
-    background-image: url('img/tło.jpg'); /* Zakładam, że masz to tło */
+    background-image: url('img/tło.jpg'); 
     background-repeat: repeat; 
     background-size: 340px; 
     background-color: #fdf8e6; 
     
-    font-family: 'Slackey', sans-serif;
+    font-family: 'Slackey', cursive;
     margin: 0;
-    padding: 20px 10px;
+    padding: 20px;
+    color: #3E2723;
+    
+    /* Centrowanie kontenera na środku ekranu */
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
+    justify-content: center;
     min-height: 100vh;
-    box-sizing: border-box;
 }
 
-.page-title {
-    text-transform: uppercase;
-    font-weight: normal;
-    margin-bottom: 15px;
-    margin-top: 10px;
-    color: #3E2723;
-    font-size: 36px;
-    letter-spacing: 2px;
-    text-shadow: 3px 3px 0 #fff; 
-    text-align: center;
-}
-
-.page-title-big {
-    font-size: 48px !important;
-    margin-bottom: 30px;
-    text-shadow: 4px 4px 0 #fff, 6px 6px 0 rgba(62, 39, 35, 0.2);
-}
-
-.main-footer {
-    margin-top: auto; 
-    padding-top: 30px; 
-    padding-bottom: 10px;
-    color: #3E2723; 
-    font-size: 14px;
-    text-align: center;
-    opacity: 0.8; 
-}
-
-/* =========================================
-   GŁÓWNY STÓŁ GRY (Zmodyfikowany)
-========================================= */
-
-.game-machine-container {
-    width: 100%;
-    max-width: 800px;
-    border-radius: 40px;
-    border: 8px solid #5D4037;
-    box-shadow: 
-        inset 0 0 40px rgba(0,0,0,0.5), /* Głębszy cień wewnątrz */
-        0 15px 25px rgba(0,0,0,0.3);
-    
-    padding: 30px 20px;
-    margin: 0 auto 20px auto;
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-sizing: border-box;
-    position: relative;
-}
-
-/* Styl zielonego sukna stołu */
-.table-felt {
-    background-color: #35682d; /* Ciemna, prehistoryczna zieleń */
-    /* Tekstura sukna za pomocą radial-gradient */
-    background-image: radial-gradient(#407a36 20%, transparent 20%),
-                      radial-gradient(#407a36 20%, transparent 20%);
-    background-size: 10px 10px;
-    background-position: 0 0, 5px 5px;
-}
-
-/* Śruby ozdobne */
-.game-machine-container::before,
-.game-machine-container::after {
-    content: '';
+/* --- PRZYCISK POWROTU (Lewy górny róg) --- */
+.btn-back {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: #8D6E63;
-    border-radius: 50%;
-    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5), 1px 1px 0 rgba(255,255,255,0.3);
-    top: 15px;
-}
-.game-machine-container::before { left: 15px; }
-.game-machine-container::after { right: 15px; }
-
-/* =========================================
-   ELEMENTY ROZGRYWKI (Blackjack)
-========================================= */
-
-.hand-section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.hand-title {
-    color: #E8F5E9; /* Jasny tekst na ciemnym tle */
-    text-shadow: 2px 2px 0 #1b3316;
-    margin: 0 0 15px 0;
-    font-size: 24px;
-}
-
-.score-display {
-    background-color: rgba(0,0,0,0.3);
-    color: #fff;
-    padding: 5px 15px;
-    border-radius: 15px;
-    margin-top: 10px;
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+    color: #3E2723;
     font-size: 18px;
-    border: 2px solid rgba(255,255,255,0.2);
-}
-
-.divider {
-    width: 90%;
-    height: 4px;
-    background-color: rgba(0,0,0,0.2);
-    border-radius: 2px;
-    margin: 20px 0;
-}
-
-/* Kontener na karty */
-.cards-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    min-height: 120px; /* Rezerwacja miejsca */
-    flex-wrap: wrap;
-}
-
-/* STYL KARTY */
-.card {
-    width: 80px;
-    height: 110px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 5px;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif; /* Prosta czcionka dla czytelności kart */
-    font-weight: bold;
-    font-size: 18px;
-    color: #333;
-    position: relative;
-    /* Animacja pojawienia się */
-    animation: dealCard 0.3s ease-out;
-}
-
-@keyframes dealCard {
-    from { transform: translateY(-20px) scale(0.8); opacity: 0; }
-    to { transform: translateY(0) scale(1); opacity: 1; }
-}
-
-.card.red-suit {
-    color: #d32f2f;
-}
-
-.card-center {
-    font-size: 32px;
-    align-self: center;
-}
-
-.card-value-bottom {
-    transform: rotate(180deg);
-}
-
-/* Rewers karty (zakryta) */
-.card-back {
-    background-color: #3E2723;
-    background-image: repeating-linear-gradient(
-        45deg,
-        #4e342e,
-        #4e342e 10px,
-        #3E2723 10px,
-        #3E2723 20px
-    );
-    border: 2px solid #fff;
-}
-
-/* =========================================
-   PANEL STEROWANIA
-========================================= */
-
-.status-display {
-    margin: 20px 0;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.9);
+    background: #FAf6EA;
     padding: 10px 20px;
-    border-radius: 10px;
-    border: 3px solid #3E2723;
-    min-width: 250px;
-}
-
-.status-text {
-    font-size: 20px;
-    margin: 0;
-    color: #3E2723;
-}
-
-.controls-panel {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-/* Uniwersalny styl przycisku gry */
-.game-button {
-    font-family: 'Slackey', sans-serif;
-    color: #fff;
-    padding: 12px 30px;
-    font-size: 20px;
-    border: none;
     border-radius: 12px;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: transform 0.1s, filter 0.1s;
-    box-shadow: 0 5px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    font-weight: bold;
+    z-index: 10;
 }
 
-.game-button:active {
-    transform: translateY(4px);
-    box-shadow: 0 1px 0 rgba(0,0,0,0.3);
+.btn-back:hover {
+    transform: scale(1.05);
+    background-color: #ece9d9;
 }
 
-/* Kolory przycisków */
-.btn-green {
-    background-color: #43A047; /* Hit */
-    border-bottom: 5px solid #2E7D32;
-}
-
-.btn-red {
-    background-color: #e53935; /* Stand */
-    border-bottom: 5px solid #c62828;
-}
-
-.btn-yellow {
-    background-color: #FFB300; /* New Game */
-    border-bottom: 5px solid #FF6F00;
-    color: #3E2723;
-}
-
-/* Responsywność */
-@media (max-width: 600px) {
-    .game-machine-container { padding: 15px 10px; }
-    .card { width: 60px; height: 90px; font-size: 14px; }
-    .card-center { font-size: 24px; }
-    .game-button { padding: 10px 20px; font-size: 16px; }
-}
-/*
-=========================================
-   NOWY UKŁAD: AWATAR PO LEWEJ
-========================================= */
-
-/* Zmieniamy kierunek sekcji na poziomy (row) */
-.hand-section.left-layout {
-    flex-direction: row; 
-    align-items: flex-start; /* Wyrównanie do góry */
-    justify-content: flex-start;
-    padding: 10px;
+/* --- GŁÓWNY KONTENER (Ten duży jasny) --- */
+.about-container {
+    background-color: #E8E4D5; /* Jasny beż/szary */
     width: 100%;
-}
-
-/* Kontener na sam awatar */
-.avatar-wrapper {
-    flex-shrink: 0; /* Nie zmniejszaj awatara */
-    margin-right: 20px; /* Odstęp od kart */
-    position: relative;
+    max-width: 1100px; /* Maksymalna szerokość na komputerze */
+    border-radius: 30px;
+    padding: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.game-avatar {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 6px solid #5D4037;
-    background-color: #fcf8e8;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-}
-
-.dealer-img {
-    border-color: #3E2723; /* Ciemniejszy brąz dla krupiera */
-}
-
-.player-img {
-    border-color: #1976D2; /* Niebieski akcent dla gracza */
-}
-
-/* Mała plakietka pod awatarem */
-.avatar-badge {
-    margin-top: -15px; /* Wchodzi na awatar */
-    background: #d32f2f;
-    color: white;
-    padding: 2px 10px;
-    border-radius: 10px;
-    font-size: 12px;
-    font-weight: bold;
-    border: 2px solid #fff;
-    z-index: 2;
-    text-transform: uppercase;
-}
-
-/* Kontener na karty i teksty (prawa strona) */
-.hand-info {
-    flex-grow: 1; /* Zajmuje resztę miejsca obok awatara */
-    display: flex;
-    flex-direction: column;
     
-    /* ZMIANA TUTAJ: */
-    align-items: center; /* Wyśrodkowanie elementów w pionie */
-    text-align: center;  /* Wyśrodkowanie tekstu */
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-/* Nadpisujemy cards-container */
-.hand-info .cards-container {
-    /* ZMIANA TUTAJ: */
-    justify-content: center; /* Karty na środku */
-    min-height: 100px;
-    width: 100%; /* Kontener zajmuje całą szerokość, żeby center zadziałał */
+/* --- TYTUŁ "DINOKLOPEDIA" --- */
+.brand-title {
+    font-size: 48px;
+    margin-top: 0;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 0 #fff;
+    text-align: center;
+    text-transform: uppercase;
+    color: #3E2723;
 }
 
-.hand-info .hand-title {
-    margin-bottom: 5px;
-    font-size: 20px;
-    /* Usunąłem margin-left/right, bo teraz centrujemy automatycznie */
+/* --- UKŁAD TREŚCI (Zdjęcie obok Tekstu) --- */
+.content-wrapper {
+    display: flex;
+    flex-direction: row; /* Domyślnie obok siebie */
+    justify-content: space-between;
+    align-items: stretch; /* Rozciągnij do równej wysokości */
+    gap: 40px; /* Odstęp między zdjęciem a tekstem */
+    width: 100%;
 }
 
-/* Responsywność dla telefonów (układ pionowy na małym ekranie) */
-@media (max-width: 600px) {
-    .hand-section.left-layout {
-        flex-direction: column; /* Wracamy do pionu */
-        align-items: center;
-    }
-    .avatar-wrapper {
-        margin-right: 0;
-        margin-bottom: 10px;
-    }
-    .hand-info {
-        align-items: center;
-        width: 100%;
-    }
-    .hand-info .cards-container {
-        justify-content: center;
-    }
+/* --- LEWA STRONA: ZDJĘCIE --- */
+.image-box {
+    flex: 1; /* Zajmuje 1 część miejsca */
+    background-color: #ccc;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 5px solid #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    min-height: 300px;
 }
 
-/* =========================================
-   EKRAN WYBORU (OVERLAY)
-========================================= */
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
+.image-box img {
     width: 100%;
     height: 100%;
-    background: rgba(62, 39, 35, 0.95); /* Ciemne tło */
-    z-index: 1000; /* Zawsze na wierzchu */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    object-fit: cover; /* Wypełnia ramkę bez zniekształceń */
+    display: block;
 }
 
-.overlay-content {
-    background-color: #E8E4D5;
-    padding: 40px;
+/* --- PRAWA STRONA: OPIS (Ciemny prostokąt) --- */
+.text-box {
+    flex: 1.2; /* Zajmuje nieco więcej miejsca niż zdjęcie (1.2 części) */
+    background-color: #8D8D8D; /* Szary kolor z Twojego szkicu (możesz zmienić na #79989B dla zieleni) */
     border-radius: 20px;
-    border: 8px solid #5D4037;
-    text-align: center;
-    max-width: 90%;
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
-}
-
-.avatar-selection-grid {
+    padding: 30px;
+    color: #fff; /* Biały tekst */
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.15); /* Wewnętrzny cień */
+    
     display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 20px;
+    flex-direction: column;
+    justify-content: center; /* Wyśrodkowanie tekstu w pionie */
 }
 
-.avatar-option {
-    cursor: pointer;
-    transition: transform 0.2s;
+.text-box h2 {
+    margin-top: 0;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
 }
 
-.avatar-option:hover {
-    transform: scale(1.1);
+.text-box p {
+    font-family: sans-serif; /* Prosta czcionka do czytania */
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 15px;
 }
 
-.avatar-option img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 4px solid #fff;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    object-fit: cover;
-    background-color: #fdf8e6;
-}
-
-.avatar-option p {
-    font-family: 'Slackey', sans-serif;
+/* --- STOPKA --- */
+.main-footer {
+    margin-top: auto;
     color: #3E2723;
-    margin-top: 5px;
+    opacity: 0.8;
+    padding-bottom: 10px;
+}
+
+/* --- WERSJA NA TELEFON (RESPONSYWNOŚĆ) --- */
+@media (max-width: 850px) {
+    .about-container {
+        padding: 25px;
+    }
+
+    .brand-title {
+        font-size: 32px;
+        margin-bottom: 25px;
+    }
+
+    /* Zmiana układu na pionowy (jedno pod drugim) */
+    .content-wrapper {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .image-box {
+        width: 100%;
+        min-height: 250px; /* Wysokość zdjęcia na telefonie */
+    }
+
+    .text-box {
+        width: 100%;
+    }
+    
+    .btn-back {
+        position: static; /* Na małym ekranie przycisk jest częścią przepływu */
+        align-self: flex-start;
+        margin-bottom: 10px;
+    }
 }
